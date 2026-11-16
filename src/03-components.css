@@ -190,7 +190,12 @@ body.p-animes .b-db_entry > .c-image img { box-shadow: 0 2px 8px rgba(60, 28, 80
 .b-comment .body img { max-width: 100%; border-radius: var(--sk-r-xs); }
 .b-comment time, .b-comment .time { color: var(--sk-ink-4); font-size: 11px; }
 .b-comment.b-comment.is-new, .b-comment.unprocessed { border-color: rgba(201, 111, 156, .35); }
-.b-new_marker { border-radius: 999px; background: #fde5f1; color: #b04b80; }
+.b-new_marker, .b-comment .b-new_marker, .b-topic .b-new_marker, .b-new_marker.active {
+  border: 0;
+  border-radius: 999px;
+  background: #fde5f1;
+  color: #b04b80;
+}
 .b-comments .comments-hider, .b-comments .comments-expander, .b-comments .comments-loader,
 .collapsed, .collapsed + .spoiler .hide-expanded {
   border: 1px dashed var(--sk-line-strong) !important;
@@ -262,10 +267,16 @@ body.p-animes .b-db_entry > .c-image img { box-shadow: 0 2px 8px rgba(60, 28, 80
 .b-entry-info .key { color: var(--sk-ink-3); }
 .b-entry-info .value { color: var(--sk-ink-2); }
 
-/* --- Bars & charts ------------------------------------------------------ */
-.bar-container .bar { border-radius: 4px; background: linear-gradient(90deg, #dac8ea, #b897cf); }
-.bar-container .bar.s0 { background: linear-gradient(90deg, #c3a6dc, #9c74bd); }
-.bar.vertical .bar-container .bar, .activity .bar.simple .bar { border-radius: 5px 5px 2px 2px; background: linear-gradient(0deg, #cdb8e2, #a481c3); }
+/* --- Bars & charts: s0 is the biggest value, s3 the smallest ------------ */
+.l-page .bar .bar-container .bar { border-radius: 4px; background-image: none; background-color: #e3d5ef; }
+.l-page .bar .bar-container .bar.s0 { background-image: linear-gradient(90deg, #9a68bd, #c47aa8); }
+.l-page .bar .bar-container .bar.s1 { background-color: #b996d2; }
+.l-page .bar .bar-container .bar.s2 { background-color: #cdb4e1; }
+.l-page .bar .bar-container .bar.s3 { background-color: #e1d1ee; }
+.l-page .bar.vertical .bar-container .bar { border-radius: 5px 5px 2px 2px; }
+.l-page .bar.vertical .bar-container .bar.s0 { background-image: linear-gradient(0deg, #b88ad3, #8f5cb2); }
+.l-page .bar .bar-container .bar .value { color: var(--sk-ink-2); font-weight: 650; }
+.l-page .bar .bar-container .bar.s0 .value { color: #fff; }
 .bar .x_label, .bar.vertical .line .x_label { color: var(--sk-ink-3); font-family: inherit; }
 
 /* --- Rating stars ------------------------------------------------------- */
@@ -297,3 +308,23 @@ body.p-animes .b-db_entry > .c-image img { box-shadow: 0 2px 8px rgba(60, 28, 80
 .b-stats_bar .bar .second { background: #d7c1e6; }
 .b-stats_bar .bar .third { background: #c4b5d3; }
 .b-stats_bar a.title { margin: 0; padding: 0; background: none; }
+
+/* --- Sidebars: each section is its own card ------------------------------ */
+aside.l-menu > .block,
+aside.l-menu > .b-collection-filters,
+aside.l-menu > div:not(.block) > :is(.block, .b-favoured, .b-menu-links) {
+  box-sizing: border-box;
+  margin-bottom: 16px;
+  padding: 16px 16px 14px;
+  border: 1px solid var(--sk-line);
+  border-radius: var(--sk-r-l);
+  background: var(--sk-surface);
+  box-shadow: var(--sk-shadow-1), var(--sk-highlight);
+}
+aside.l-menu .subheadline { margin-bottom: 10px; padding-bottom: 8px; font-size: 11px; }
+aside.l-menu .block .block { margin-bottom: 0; }
+
+/* Nothing-to-show notes in sidebars only add noise */
+aside.l-menu > .block:has(> .subheadline + .b-nothing_here:last-child),
+aside.l-menu > div:not(.block) > .block:has(> .subheadline + .b-nothing_here:last-child) { display: none; }
+.b-nothing_here { color: var(--sk-ink-4); }

@@ -1,0 +1,103 @@
+/* ==========================================================================
+   Catalog grids (anime / manga / ranobe / recommendations / ongoings)
+   ========================================================================== */
+.p-animes_collection .cc-entries,
+.p-mangas_collection .cc-entries,
+.p-ranobe_collection .cc-entries,
+.p-recommendations-index .cc-entries {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px 14px;
+}
+:is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries::after { display: none; }
+:is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries > .b-catalog_entry {
+  float: none;
+  box-sizing: border-box;
+  width: auto !important;
+  min-width: 0;
+  margin: 0 !important;
+}
+:is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries .cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 7px;
+  border: 1px solid var(--sk-line);
+  border-radius: var(--sk-r);
+  background: var(--sk-surface);
+  transition: border-color var(--sk-fast) ease, background-color var(--sk-fast) ease, box-shadow var(--sk-dur) ease;
+}
+:is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries .image-decor {
+  display: block;
+  flex-shrink: 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  box-shadow: none !important;
+}
+:is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries :is(.image-cutter, picture) { display: block; box-sizing: border-box; width: 100%; height: 100%; padding: 0; overflow: hidden; border-radius: inherit; }
+:is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+:is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries .title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  min-height: 2.9em;
+  margin: 9px 0 0;
+  padding: 0 2px;
+  overflow: hidden;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.45;
+}
+:is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries .misc { display: flex; justify-content: space-between; gap: 5px; margin: auto 0 0; padding: 6px 2px 1px; font-size: 11px; }
+:is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries .cover:hover { border-color: var(--sk-line-strong); background: #fff; box-shadow: var(--sk-shadow-2); }
+:is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries .collection_score {
+  position: absolute;
+  z-index: 2;
+  inset: 13px auto auto 13px;
+  height: auto;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(48, 24, 64, .72);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.4;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+:is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries .score_marker_star { color: #f6c9e2; }
+
+/* Filters */
+.b-collection-filters .subheadline { margin-bottom: 8px; }
+.b-collection-filters :is(.c-filter-select, .c-ms-control), .b-collection-filters select {
+  box-sizing: border-box;
+  max-width: 100%;
+  border: 1px solid var(--sk-line-strong);
+  border-radius: var(--sk-r-s);
+  background-color: rgba(255, 255, 255, .86);
+  color: var(--sk-ink-2);
+}
+.c-ms-dropdown { border-color: var(--sk-line); border-radius: var(--sk-r-s); box-shadow: var(--sk-shadow-2); }
+.b-collection-filters .b-block_list li.selected,
+.b-collection-filters li.item-add.selected { background: var(--sk-tint-2); }
+
+.p-animes_collection .pagination,
+.p-mangas_collection .pagination { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+
+@media screen and (max-width: 1279px) {
+  :is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media screen and (max-width: 767px) {
+  :is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 8px; }
+  :is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries .cover { padding: 5px; border-radius: var(--sk-r-s); }
+  :is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries .title { font-size: 12px; }
+  :is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries .collection_score { inset: 9px auto auto 9px; font-size: 10px; }
+}
+@media screen and (max-width: 420px) {
+  :is(.p-animes_collection, .p-mangas_collection, .p-ranobe_collection, .p-recommendations-index) .cc-entries { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

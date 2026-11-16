@@ -67,8 +67,7 @@
 /* --- Page card ---------------------------------------------------------- */
 .l-page {
   box-sizing: border-box;
-  width: min(1320px, calc(100% - 48px));
-  max-width: none;
+  width: calc(100% - 48px);
   min-width: 0;
   margin: 28px auto 24px;
   padding: 30px 32px 8px;
@@ -78,6 +77,8 @@
   box-shadow: var(--sk-shadow-page), var(--sk-highlight);
   animation: none;
 }
+.x1200 .l-page { max-width: 1320px; }
+.x1000 .l-page { max-width: 1080px; }
 /* Glass lives on a pseudo-element: blur on .l-page itself would trap
    fixed-position popups inside the card. */
 .l-page::before {

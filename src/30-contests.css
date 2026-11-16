@@ -1,0 +1,238 @@
+/* ==========================================================================
+   Contests (tournaments) — old frontend markup
+   ========================================================================== */
+
+/* --- Index -------------------------------------------------------------- */
+.p-contests-index .contests > .block { margin-bottom: 26px; }
+.p-contests-index .contests > .block > .b-options-floated { float: right; margin-top: -2px; }
+.p-contests-index .contests ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.p-contests-index .contests li.contest {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  margin: 0;
+  padding: 9px 12px;
+  border: 1px solid var(--sk-line);
+  border-radius: var(--sk-r-s);
+  background: var(--sk-surface);
+  transition: border-color var(--sk-fast) ease, background-color var(--sk-fast) ease;
+}
+.p-contests-index .contests li.contest::marker { content: none; }
+.p-contests-index .contests li.contest:hover { border-color: var(--sk-line-strong); background: #fff; }
+.p-contests-index .contests li.contest .date {
+  flex: 0 0 auto;
+  float: none;
+  width: auto;
+  margin: 0;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--sk-tint);
+  color: var(--sk-ink-3);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.p-contests-index .contests li.contest a,
+.p-contests-index .contests li.contest > span { min-width: 0; overflow: hidden; color: var(--sk-ink); font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.p-contests-index .contests li.contest a:hover { color: var(--sk-link-hover); }
+
+/* --- Contest page ------------------------------------------------------- */
+.p-contests .l-page .head + .block .b-text_with_paragraphs { color: var(--sk-ink-2); }
+.p-contests .contest_round { position: relative; }
+.p-contests .contest_round > .b-options-floated {
+  position: absolute;
+  right: 0;
+  top: -4px;
+  z-index: 2;
+  display: flex;
+  gap: 6px;
+  float: none;
+  margin: 0;
+}
+.p-contests .contest_round > .b-options-floated > :is(a, span) {
+  padding: 3px 10px;
+  border: 1px solid var(--sk-line);
+  border-radius: 999px;
+  background: var(--sk-surface-strong);
+  color: var(--sk-ink-3);
+  font-size: 11px;
+  font-weight: 600;
+}
+.p-contests .contest_round > .b-options-floated > a:hover { border-color: var(--sk-line-strong); color: var(--sk-plum); }
+.p-contests .contest_round > .b-options-floated > :is(a, span)::before,
+.p-contests .contest_round > .b-options-floated > :is(a, span)::after,
+.p-contests .cc-round_stats .b-options-floated > *::after { content: none !important; }
+
+/* Current match */
+.p-contests .match-container {
+  box-sizing: border-box;
+  margin-bottom: 22px;
+  padding: 22px 20px 18px;
+  border: 1px solid var(--sk-line);
+  border-radius: var(--sk-r-l);
+  background:
+    radial-gradient(ellipse 50% 80% at 25% 0%, rgba(244, 214, 236, .45), transparent 70%),
+    radial-gradient(ellipse 50% 80% at 75% 100%, rgba(214, 206, 248, .35), transparent 70%),
+    var(--sk-surface-strong);
+  box-shadow: var(--sk-shadow-1), var(--sk-highlight);
+}
+.p-contests .b-contest_match .match-members { align-items: center; justify-content: center; gap: 28px; }
+.p-contests .b-contest_match .match-member {
+  padding: 8px;
+  border: 1px solid var(--sk-line);
+  border-radius: var(--sk-r);
+  background: var(--sk-surface);
+  transition: border-color var(--sk-fast) ease, box-shadow var(--sk-dur) ease, opacity var(--sk-dur) ease, filter var(--sk-dur) ease;
+}
+.p-contests .b-contest_match .match-member[data-action] { cursor: pointer; }
+.p-contests .b-contest_match .match-member:hover { border-color: var(--sk-line-strong); box-shadow: var(--sk-shadow-2); }
+.p-contests .b-contest_match .match-member.winner { border-color: rgba(176, 104, 160, .45); box-shadow: 0 0 0 3px rgba(201, 111, 156, .14), var(--sk-shadow-2); }
+.p-contests .b-contest_match .match-member.loser { opacity: .72; filter: saturate(.75); }
+.p-contests .b-contest_match .match-member.loser:hover { opacity: 1; filter: none; }
+.p-contests .b-contest_match .match-member .b-catalog_entry { margin: 0; }
+.p-contests .b-contest_match .vs .label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: var(--sk-grad);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 20px rgba(128, 70, 150, .3);
+}
+.p-contests .b-contest_match .vs .hint { margin-top: 10px; color: var(--sk-ink-3); font-size: 11px; text-align: center; }
+.p-contests .b-contest_match .prev-match,
+.p-contests .b-contest_match .next-match { border-radius: var(--sk-r-s); color: var(--sk-ink-4); transition: background-color var(--sk-fast), color var(--sk-fast); }
+.p-contests .b-contest_match .prev-match:hover,
+.p-contests .b-contest_match .next-match:hover { background: var(--sk-tint); color: var(--sk-plum); }
+
+/* Vote split bar */
+.p-contests .votes-percents { margin: 18px auto 0; max-width: 560px; }
+.p-contests .votes-percents .left-part {
+  overflow: hidden;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--sk-grad);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 28px;
+  font-variant-numeric: tabular-nums;
+}
+.p-contests .votes-percents .left-part > span { padding-left: 12px; }
+.p-contests .votes-percents .right-part {
+  height: 28px;
+  background: #e7dcef;
+  color: var(--sk-ink-2);
+  line-height: 28px;
+  text-align: right;
+}
+.p-contests .votes-percents .right-part > span { padding-right: 12px; }
+
+/* Round stats: rating + match lists */
+.p-contests .cc-round_stats { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 22px; margin-bottom: 22px; }
+.p-contests .cc-round_stats::after { display: none; }
+.p-contests .cc-round_stats > .c-column {
+  position: relative;
+  float: none;
+  box-sizing: border-box;
+  width: auto !important;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 16px 18px;
+  border: 1px solid var(--sk-line);
+  border-radius: var(--sk-r-l);
+  background: var(--sk-surface);
+  box-shadow: var(--sk-shadow-1), var(--sk-highlight);
+}
+.p-contests .cc-round_stats > .c-column > .b-options-floated { position: absolute; right: 16px; top: 14px; }
+.p-contests .rating .member {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 6px;
+  border-radius: var(--sk-r-xs);
+  line-height: 1.4;
+}
+.p-contests .rating .member:nth-child(-n+3) .position { background: var(--sk-grad); color: #fff; }
+.p-contests .rating .member:hover { background: var(--sk-tint); }
+.p-contests .rating .member .position {
+  flex: 0 0 22px;
+  height: 22px;
+  border-radius: 7px;
+  background: var(--sk-tint);
+  color: var(--sk-ink-2);
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 22px;
+  text-align: center;
+}
+.p-contests .rating .member a { min-width: 0; overflow: hidden; color: var(--sk-ink); text-overflow: ellipsis; white-space: nowrap; }
+.p-contests .rating .member a:hover { color: var(--sk-link-hover); }
+.p-contests .match-day { display: flex; flex-direction: column; gap: 5px; }
+.p-contests .match-day .date { color: var(--sk-ink-3); font-size: 11px; }
+.p-contests .match-day .group {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--sk-tint);
+  color: var(--sk-ink-3);
+  font-size: 10px;
+  font-weight: 750;
+}
+.p-contests .match-day .match-link {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 7px 10px;
+  border: 1px solid var(--sk-line);
+  border-radius: var(--sk-r-s);
+  background: rgba(255, 255, 255, .62);
+  cursor: pointer;
+}
+.p-contests .match-day .match-link::after { display: none; }
+.p-contests .match-day .match-link > .c-column { display: flex; align-items: baseline; gap: 6px; float: none; width: auto; min-width: 0; margin: 0; }
+.p-contests .match-day .match-link > .c-column a { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.p-contests .match-day .match-link .winner a { color: var(--sk-ink); font-weight: 650; }
+.p-contests .match-day .match-link .loser a { color: var(--sk-ink-3); }
+.p-contests .match-day .match-link .matches-num { flex: 0 0 auto; color: var(--sk-ink-3); font-size: 11px; font-variant-numeric: tabular-nums; }
+.p-contests .match-day .match-link .winner .matches-num { color: var(--sk-plum); font-weight: 700; }
+.p-contests .match-day .match-link:hover { border-color: var(--sk-line-strong); background: #fff; }
+.p-contests .match-day .match-link.active { border-color: rgba(176, 104, 160, .45); background: #fff; box-shadow: inset 3px 0 0 var(--sk-sakura); }
+
+/* Sidebar */
+.p-contests .b-contests-menu .actions:has(> .b-block_list:empty) { display: none; }
+.p-contests .b-contests-menu p { margin: 0; color: var(--sk-ink-2); }
+.p-contests .b-contests-menu .results { display: inline-block; margin-top: 8px; color: var(--sk-link); font-weight: 650; }
+.p-contests .b-contests-menu .count { color: var(--sk-ink-3); }
+.p-contests .cc-4a.user_rates-minified { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.p-contests .cc-4a.user_rates-minified::after { display: none; }
+.p-contests .cc-4a.user_rates-minified > .b-catalog_entry { float: none; width: auto; min-width: 0; margin: 0; }
+
+@media screen and (max-width: 1023px) {
+  .p-contests .cc-round_stats { grid-template-columns: minmax(0, 1fr); }
+}
+@media screen and (max-width: 767px) {
+  .p-contests-index .contests ol { grid-template-columns: minmax(0, 1fr); }
+  .p-contests .contest_round > .b-options-floated { position: static; justify-content: flex-end; margin-bottom: 8px; }
+  .p-contests .match-container { padding: 14px 10px; }
+  .p-contests .b-contest_match .match-members { gap: 10px; }
+  .p-contests .b-contest_match .match-member { padding: 5px; }
+  .p-contests .b-contest_match .vs .label { width: 40px; height: 40px; font-size: 12px; }
+  .p-contests .match-day .match-link { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}

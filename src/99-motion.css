@@ -1,0 +1,22 @@
+/* ==========================================================================
+   Motion policy
+   Nothing animates on page load (Shikimori re-renders pages when switching
+   between its two frontends, and entrance animations would play twice).
+   Only direct feedback moves, and it respects reduced-motion.
+   ========================================================================== */
+#profiles_show .l-page,
+#profiles_show .profile-head,
+#profiles_show .profile-content > .cc-2,
+#profiles_show .achievements { animation: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  body *, body *::before, body *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    transition-delay: 0s !important;
+  }
+  .b-catalog_entry .cover:hover img,
+  .p-achievements .b-achievement:hover .c-image img,
+  .p-profiles-show .achievements .b-achievement:hover .c-image img { transform: none !important; }
+}
