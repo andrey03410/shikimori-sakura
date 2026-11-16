@@ -1,0 +1,17 @@
+@media (prefers-reduced-motion: no-preference){.b-badge.level-1[data-progress="100"][href$="/franchise/bakuman"]{--sk-badge-gif: url("https://media.tenor.com/BjV3_RJDUbEAAAAM/bakuman-anime.gif")}
+.b-badge.level-1[data-progress="100"][href$="/franchise/shingeki_no_kyojin"]{--sk-badge-gif: url("https://media.tenor.com/fO4dEGdkGOMAAAAM/%E1%83%9B%E1%83%AE%E1%83%90%E1%83%A0%E1%83%98%E1%83%A1-%E1%83%9D%E1%83%AA%E1%83%9C%E1%83%94%E1%83%91%E1%83%90.gif")}
+.b-badge.level-1[data-progress="100"][href$="/franchise/yahari_ore_no_seishun_love_comedy_wa_machigatteiru"]{--sk-badge-gif: url("https://media.tenor.com/n0HQ6pAEBGsAAAAM/yukino-yukinoshita-yukinoshita-yukino.gif")}
+.b-badge.level-1[data-progress="100"][href$="/franchise/kaguya_sama"]{--sk-badge-gif: url("https://media.tenor.com/r1G0Iat2BMMAAAAM/anime-kaguya.gif")}
+.b-badge.level-1[data-progress="100"][href$="/franchise/k_on"]{--sk-badge-gif: url("https://media.tenor.com/ohxROUA8aW0AAAAM/shy-cute.gif")}
+.b-badge.level-1[data-progress="100"][href$="/franchise/chuunibyou_demo_koi_ga_shitai"]{--sk-badge-gif: url("https://media.tenor.com/wsxGmtwFpygAAAAM/rikka-takanashi-chuunibyou-demo-koi-ga-shitai.gif")}
+.b-badge.level-1[data-progress="100"][href$="/franchise/clannad"]{--sk-badge-gif: url("https://media.tenor.com/3kKPtoLs1HAAAAAM/nagisa-furukawa-nagisa.gif")}
+.b-badge.level-1[data-progress="100"][href$="/franchise/when_they_cry"]{--sk-badge-gif: url("https://media.tenor.com/_YWjApwmYbMAAAAM/higurashi-gou.gif")}
+.b-badge.level-1[data-progress="100"][href$="/franchise/non_non_biyori"]{--sk-badge-gif: url("https://media.tenor.com/VB4MlyQP35QAAAAM/non-non-biyori-renge.gif")}
+.b-badge.level-1[data-progress="100"][href$="/franchise/toaru_majutsu_no_index"]{--sk-badge-gif: url("https://media.tenor.com/qoGnbT54p2UAAAAM/misaka-mikoto-a-certain-scientific-railgun.gif")}
+.b-badge.level-1[data-progress="100"][href$="/franchise/hibike_euphonium"]{--sk-badge-gif: url("https://media.tenor.com/mNyjPJMR5QgAAAAM/hibike-euphonium.gif")}
+.b-badge.level-1[data-progress="100"][href$="/franchise/chihayafuru"]{--sk-badge-gif: url("https://media.tenor.com/tjTB_fQ1qBMAAAAM/chihayafuru-chihaya.gif")}
+.b-badge.level-1[data-progress="100"][href$="/franchise/yuru_yuri"]{--sk-badge-gif: url("https://media.tenor.com/gkGwJq_Iy64AAAAM/kyouko-toshin%C5%8D-yuru-yuri.gif")}
+.b-badge.level-1[data-progress="100"][href$="/franchise/free"]{--sk-badge-gif: url("https://media.tenor.com/Gqe_N7ZkGLIAAAAM/anime-float.gif")}
+.b-badge.level-1[data-progress="100"][href$="/franchise/aria"]{--sk-badge-gif: url("https://media.tenor.com/LTK_PPo1nx8AAAAM/aria-the-animation-akari-mizunashi.gif")}
+.b-badge.level-1[data-progress="100"][href*="/achievements/franchise/"]::after{content: "";position: absolute;inset: 0;z-index: 1;border-radius: inherit;background: var(--sk-badge-gif, none) center / cover no-repeat;pointer-events: none}
+}

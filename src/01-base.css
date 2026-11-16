@@ -1,0 +1,65 @@
+/* ==========================================================================
+   Base: background, type, links, focus, selection, scrollbars
+   ========================================================================== */
+
+/* The sakura sits on its own fixed layer: it is composited once and never
+   repainted while scrolling (background-attachment: fixed repaints every frame). */
+html {
+  background: #eadcf0;
+  scroll-padding-top: calc(var(--top-menu-height, 46px) + 16px);
+}
+body {
+  background: transparent !important;
+  color: var(--sk-ink);
+  font-family: var(--sk-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 8% 12%, rgba(255, 214, 236, .38), transparent 70%),
+    radial-gradient(ellipse 55% 45% at 92% 88%, rgba(200, 214, 255, .30), transparent 70%),
+    linear-gradient(180deg, rgba(246, 234, 252, .18), rgba(233, 220, 245, .26)),
+    url({{ASSETS}}/sakura-bg.jpg) center / cover no-repeat;
+}
+
+/* Links */
+a, .b-link { transition: color var(--sk-fast) ease, background-color var(--sk-fast) ease, border-color var(--sk-fast) ease, box-shadow var(--sk-fast) ease, opacity var(--sk-fast) ease; }
+.b-link, .b-link:visited { color: var(--sk-link); }
+.b-link:hover { color: var(--sk-link-hover); }
+
+/* Numbers line up like a dashboard */
+.b-stats_bar, .stat_names, .count, .misc, .score-value, .percent, .position, .votes-percents,
+.list-lines td.num, .rating .member, .b-options-floated.count, .current-value {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Focus: visible for keyboards, invisible for mice */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible,
+textarea:focus-visible, [tabindex]:focus-visible, .b-button:focus-visible {
+  outline: 2px solid var(--sk-plum) !important;
+  outline-offset: 3px;
+  border-radius: var(--sk-r-xs);
+}
+
+::selection { color: var(--sk-ink); background: #f0cfe6; }
+
+/* Slim, quiet scrollbars */
+* { scrollbar-width: thin; scrollbar-color: rgba(140, 98, 176, .45) transparent; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { border: 3px solid transparent; border-radius: 10px; background: rgba(140, 98, 176, .42) padding-box; }
+::-webkit-scrollbar-thumb:hover { background-color: rgba(122, 76, 160, .62); }
+
+/* Floating feedback tab overlaps content on narrow screens */
+.b-feedback { display: none !important; }
+
+/* Empty wrappers should not leave holes */
+.b-options-floated:empty, .subheadline-buttons:empty, .block:empty, .b-menu-line:empty,
+.c-column:empty, .notice:empty, .cc-2a:empty { display: none !important; }

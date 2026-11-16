@@ -1,0 +1,60 @@
+/* ==========================================================================
+   Shikimori Sakura {{VERSION}} — design tokens
+   Sakura + lilac palette, soft glass surfaces, motion only on interaction.
+   ========================================================================== */
+:root {
+  /* Ink */
+  --sk-ink: #3d2c47;
+  --sk-ink-2: #65516f;
+  --sk-ink-3: #94829f;
+  --sk-ink-4: #b9aac2;
+
+  /* Accent: plum → sakura */
+  --sk-plum: #8a56a3;
+  --sk-plum-deep: #6f4188;
+  --sk-sakura: #c96f9c;
+  --sk-lilac: #b59bd0;
+  --sk-grad: linear-gradient(100deg, #9b68b6 0%, #c97aa6 100%);
+  --sk-grad-soft: linear-gradient(100deg, rgba(196, 160, 222, .32), rgba(240, 186, 214, .30));
+  --sk-link: #7b4d94;
+  --sk-link-hover: #b0568a;
+
+  /* Surfaces */
+  --sk-page: rgba(255, 251, 255, .80);
+  --sk-surface: rgba(255, 255, 255, .74);
+  --sk-surface-strong: rgba(255, 255, 255, .94);
+  --sk-surface-sunk: rgba(244, 236, 249, .72);
+  --sk-tint: #f4ebf9;
+  --sk-tint-2: #ecdff4;
+  --sk-line: rgba(117, 74, 140, .13);
+  --sk-line-strong: rgba(117, 74, 140, .24);
+  --sk-highlight: inset 0 1px 0 rgba(255, 255, 255, .75);
+
+  /* Status */
+  --sk-watching: #4f9a8e;
+  --sk-completed: #8c62b0;
+  --sk-planned: #7f86b9;
+  --sk-on-hold: #b38b45;
+  --sk-dropped: #c0688a;
+
+  /* Shape & depth */
+  --sk-r-xs: 6px;
+  --sk-r-s: 10px;
+  --sk-r: 14px;
+  --sk-r-l: 20px;
+  --sk-r-xl: 28px;
+  --sk-shadow-1: 0 1px 2px rgba(60, 28, 80, .04), 0 4px 14px rgba(60, 28, 80, .05);
+  --sk-shadow-2: 0 2px 6px rgba(60, 28, 80, .06), 0 14px 34px rgba(60, 28, 80, .11);
+  --sk-shadow-page: 0 30px 80px rgba(66, 33, 86, .16), 0 2px 10px rgba(66, 33, 86, .05);
+  --sk-ring: 0 0 0 3px rgba(160, 108, 192, .22);
+
+  /* Motion */
+  --sk-ease: cubic-bezier(.22, .8, .24, 1);
+  --sk-fast: .16s;
+  --sk-dur: .24s;
+  --sk-slow: .4s;
+
+  /* Type */
+  --sk-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI Variable Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --sk-gap: 20px;
+}

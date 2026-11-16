@@ -1,0 +1,299 @@
+/* ==========================================================================
+   Shared components — used by both of Shikimori's frontends
+   ========================================================================== */
+
+/* --- Section titles: quiet "eyebrow" labels with a sakura tick ---------- */
+.headline, .midheadline, .subheadline {
+  position: relative;
+  min-height: 0;
+  padding: 0 0 10px 18px;
+  margin-bottom: 14px;
+  border: 0;
+  border-bottom: 1px solid var(--sk-line);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--sk-ink-2);
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.5;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.headline::before, .midheadline::before, .subheadline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .5em;
+  width: 10px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--sk-grad);
+}
+.headline > a, .midheadline > a, .subheadline > a { color: var(--sk-ink-2); text-decoration: none; }
+.headline > a:hover, .midheadline > a:hover, .subheadline > a:hover { color: var(--sk-link-hover); }
+.headline > a::before, .midheadline > a::before, .subheadline > a::before { color: var(--sk-lilac); transition: transform var(--sk-dur) var(--sk-ease), color var(--sk-fast); }
+.subheadline > a:hover::before { color: var(--sk-sakura); transform: translateX(2px); }
+.subheadline .count, .subheadline > a .count {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--sk-tint);
+  color: var(--sk-ink-3);
+  font-size: 10px;
+  letter-spacing: 0;
+}
+/* Old preset left coloured side-bars on a few headings */
+h2.headline.blue.m10, h2.subheadline.orange.m10, h2.subheadline.green.m10 { border-left: 0; font-size: 12px; }
+
+.b-options-floated { color: var(--sk-ink-4); font-size: 11px; }
+.b-options-floated a { color: var(--sk-ink-3); }
+.b-options-floated a:hover { color: var(--sk-link-hover); }
+
+/* --- Buttons ------------------------------------------------------------ */
+.b-button, .b-form input[type=submit], input[type=submit].b-button, .b-forums .create-topic {
+  border: 0;
+  border-radius: var(--sk-r-s);
+  background: var(--sk-grad);
+  color: #fff;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .25) inset, 0 6px 16px rgba(128, 70, 150, .22);
+  transition: filter var(--sk-fast) ease, box-shadow var(--sk-dur) ease, transform var(--sk-fast) ease;
+}
+.b-button:hover, .b-form input[type=submit]:hover, .b-forums .create-topic:hover {
+  filter: brightness(1.06) saturate(1.05);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .25) inset, 0 10px 22px rgba(128, 70, 150, .28);
+}
+.b-button:active, .b-form input[type=submit]:active { transform: translateY(1px); filter: brightness(.97); }
+.b-button.cancel, .b-button.secondary {
+  background: var(--sk-tint);
+  color: var(--sk-plum);
+  box-shadow: none;
+}
+
+/* --- Inputs ------------------------------------------------------------- */
+.l-page input[type=text], .l-page input[type=search], .l-page input[type=email],
+.l-page input[type=password], .l-page input[type=number], .l-page input[type=url],
+.l-page select, .l-page textarea, .b-shiki_editor .body .editor textarea {
+  border: 1px solid var(--sk-line-strong);
+  border-radius: var(--sk-r-s);
+  background-color: rgba(255, 255, 255, .86);
+  color: var(--sk-ink);
+  transition: border-color var(--sk-fast) ease, box-shadow var(--sk-dur) ease, background-color var(--sk-fast) ease;
+}
+.l-page input:focus, .l-page select:focus, .l-page textarea:focus,
+.b-shiki_editor .body .editor textarea:focus {
+  border-color: rgba(138, 86, 163, .55);
+  background-color: #fff;
+  box-shadow: var(--sk-ring);
+  outline: none;
+}
+.l-page input::placeholder, .l-page textarea::placeholder { color: var(--sk-ink-4); }
+.l-page input[type=checkbox], .l-page input[type=radio] { accent-color: var(--sk-plum); }
+.b-collection_search .field input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 44px;
+  padding: 0 40px 0 16px;
+  border-radius: var(--sk-r);
+  background: var(--sk-surface-strong);
+  box-shadow: var(--sk-shadow-1);
+}
+
+/* --- Comment editor ----------------------------------------------------- */
+.b-shiki_editor {
+  padding: 14px;
+  border: 1px solid var(--sk-line);
+  border-radius: var(--sk-r-l);
+  background: var(--sk-surface);
+}
+.b-shiki_editor .editor-controls .b-tooltipped, aside.buttons .editor-controls .b-tooltipped {
+  border: 1px solid transparent;
+  border-radius: var(--sk-r-xs);
+  background: transparent;
+  color: var(--sk-ink-3);
+}
+.b-shiki_editor .editor-controls .b-tooltipped:hover, aside.buttons .editor-controls .b-tooltipped:hover {
+  border-color: var(--sk-line);
+  background: var(--sk-tint) !important;
+  color: var(--sk-plum);
+}
+
+/* --- Tags & chips ------------------------------------------------------- */
+.b-tag {
+  display: inline-block;
+  margin: 2px 3px 2px 0;
+  padding: 1px 8px;
+  border: 1px solid var(--sk-line);
+  border-radius: 999px;
+  background: var(--sk-surface-strong);
+  color: var(--sk-ink-2);
+  font-size: 11.5px;
+  line-height: 1.8;
+  text-decoration: none;
+}
+.b-tag:hover { border-color: var(--sk-line-strong); background: var(--sk-tint); color: var(--sk-plum-deep); }
+.b-tag[href$="/9-Ecchi"], .b-tag[href$="/r_plus"] { border-color: #f2c4d3; background: #fff3f6; }
+.b-tag[href$="/12-Hentai"], .b-tag[href$="/rx"] { border-color: #ee9fb5; background: #ffe9ef; color: #a23c63; }
+.b-anime_status_tag { border-radius: var(--sk-r-xs); }
+span.other-names { border: 1px solid var(--sk-line) !important; border-radius: 999px; background: var(--sk-tint) !important; }
+
+/* --- Avatars & logos ---------------------------------------------------- */
+.b-user16 img, .b-comment > .inner header img, .b-dialog > .inner header img,
+.b-message > .inner header img, .b-comments-notifier { border-radius: 50%; }
+.b-club .logo { border-radius: var(--sk-r-s); }
+.b-user.avatar img, .b-user.named_avatar img, .b-user.avatar_fixed_margin img {
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #fff, 0 3px 10px rgba(80, 40, 100, .14);
+  transition: box-shadow var(--sk-dur) ease;
+}
+.b-user.avatar:hover img, .b-user.named_avatar:hover img, .b-user.avatar_fixed_margin:hover img {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px rgba(176, 120, 200, .45), 0 6px 14px rgba(80, 40, 100, .18);
+}
+
+/* --- Poster cards ------------------------------------------------------- */
+.b-catalog_entry .cover .image-decor,
+.b-catalog_entry .cover .image-decor img,
+.b-catalog_entry .image-cutter { border-radius: var(--sk-r-s); }
+.b-catalog_entry .cover .image-decor {
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(60, 28, 80, .10);
+  transition: box-shadow var(--sk-dur) var(--sk-ease);
+}
+.b-catalog_entry .cover img { transition: transform var(--sk-slow) var(--sk-ease); }
+.b-catalog_entry .cover .title { color: var(--sk-ink); }
+.b-catalog_entry .cover:hover .title { color: var(--sk-link-hover); }
+.b-catalog_entry .cover .misc { color: var(--sk-ink-3); }
+@media (hover: hover) and (pointer: fine) {
+  .b-catalog_entry .cover:hover .image-decor { box-shadow: 0 0 0 2px rgba(190, 140, 210, .55), 0 12px 26px rgba(70, 32, 92, .20); }
+  .b-catalog_entry .cover:hover img { transform: scale(1.04); }
+}
+/* Old preset painted heavy black shadows around posters */
+body.p-animes_collection .b-catalog_entry .cover .image-decor,
+body.p-animes .b-catalog_entry .cover .image-decor,
+body.p-animes .b-db_entry > .c-image img { box-shadow: 0 2px 8px rgba(60, 28, 80, .10); }
+
+/* --- Comments ----------------------------------------------------------- */
+.b-comment {
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--sk-line);
+  border-radius: var(--sk-r);
+  background: var(--sk-surface);
+  transition: border-color var(--sk-fast) ease, background-color var(--sk-fast) ease;
+}
+.b-comment:hover { border-color: var(--sk-line-strong); background: var(--sk-surface-strong); }
+.b-comment > .inner { min-width: 0; }
+.b-comment header .name, .b-comment header a.name { color: var(--sk-plum-deep); font-weight: 650; }
+.b-comment .body { color: var(--sk-ink-2); line-height: 1.7; overflow-wrap: anywhere; }
+.b-comment .body img { max-width: 100%; border-radius: var(--sk-r-xs); }
+.b-comment time, .b-comment .time { color: var(--sk-ink-4); font-size: 11px; }
+.b-comment.b-comment.is-new, .b-comment.unprocessed { border-color: rgba(201, 111, 156, .35); }
+.b-new_marker { border-radius: 999px; background: #fde5f1; color: #b04b80; }
+.b-comments .comments-hider, .b-comments .comments-expander, .b-comments .comments-loader,
+.collapsed, .collapsed + .spoiler .hide-expanded {
+  border: 1px dashed var(--sk-line-strong) !important;
+  border-radius: var(--sk-r-s);
+  background: var(--sk-surface-sunk) !important;
+  color: var(--sk-plum);
+  box-shadow: none;
+}
+.b-comments .comments-hider:hover, .b-comments .comments-expander:hover, .b-comments .comments-loader:hover,
+.collapsed:hover, .collapsed + .spoiler .hide-expanded:hover {
+  border-style: solid !important;
+  background: var(--sk-tint) !important;
+  box-shadow: none;
+}
+.b-quote, blockquote {
+  padding: 10px 14px;
+  border-left: 3px solid var(--sk-lilac);
+  border-radius: 0 var(--sk-r-s) var(--sk-r-s) 0;
+  background: var(--sk-surface-sunk);
+  color: var(--sk-ink-2);
+}
+.b-spoiler .content, .b-spoiler_block > span { border-radius: var(--sk-r-xs); }
+.b-spoiler_block > span, .b-spoiler .label { background: var(--sk-tint); color: var(--sk-plum); }
+.b-code-v2, pre { border-radius: var(--sk-r-s); }
+
+.b-offtopic_marker::before, .b-summary_marker::before { border-radius: var(--sk-r-xs); transition: background-color var(--sk-fast), color var(--sk-fast); }
+
+/* --- Lists, menus, pagination ------------------------------------------ */
+.b-block_list li, .b-menu-line a, .p-contests .match-day .match-link { border-radius: var(--sk-r-xs); transition: background-color var(--sk-fast) ease, color var(--sk-fast) ease; }
+.b-block_list li:hover, .p-contests .match-day .match-link:hover { background: var(--sk-tint); }
+.b-block_list li.selected, .p-contests .match-day .match-link.active { background: var(--sk-tint-2); }
+
+.pagination { color: var(--sk-ink-3); font-variant-numeric: tabular-nums; }
+.pagination .link { padding: 3px 9px; border-radius: var(--sk-r-xs); color: var(--sk-link); }
+.pagination .link:hover { background: var(--sk-tint); }
+.pagination .link-current { color: var(--sk-plum-deep); font-weight: 700; }
+.pagination .disabled { color: var(--sk-ink-4); }
+
+.b-postloader {
+  box-sizing: border-box;
+  max-width: 100%;
+  margin-top: 14px;
+  padding: 11px;
+  border: 1px dashed var(--sk-line-strong);
+  border-radius: var(--sk-r-s);
+  background: var(--sk-surface-sunk);
+  color: var(--sk-plum);
+  text-align: center;
+}
+.b-postloader:hover { border-style: solid; background: var(--sk-tint); }
+
+/* Segmented switchers (list / posters etc.) */
+.b-list_switchers .switcher { border-radius: var(--sk-r-xs); color: var(--sk-ink-3); transition: background-color var(--sk-fast), color var(--sk-fast); }
+.b-list_switchers .switcher:hover { color: var(--sk-plum); background: var(--sk-tint); }
+.b-list_switchers .switcher.selected { color: var(--sk-plum-deep); background: var(--sk-tint-2); }
+
+/* --- Tooltips ----------------------------------------------------------- */
+.tooltip-inner, .b-tooltip .inner {
+  border: 1px solid var(--sk-line);
+  border-radius: var(--sk-r);
+  background: rgba(255, 252, 255, .98);
+  box-shadow: var(--sk-shadow-2);
+  color: var(--sk-ink-2);
+}
+.tooltip-inner .close { border-radius: var(--sk-r-xs); background: var(--sk-tint); }
+
+/* --- Key/value info ----------------------------------------------------- */
+.b-entry-info .line { line-height: 1.75; }
+.b-entry-info .key { color: var(--sk-ink-3); }
+.b-entry-info .value { color: var(--sk-ink-2); }
+
+/* --- Bars & charts ------------------------------------------------------ */
+.bar-container .bar { border-radius: 4px; background: linear-gradient(90deg, #dac8ea, #b897cf); }
+.bar-container .bar.s0 { background: linear-gradient(90deg, #c3a6dc, #9c74bd); }
+.bar.vertical .bar-container .bar, .activity .bar.simple .bar { border-radius: 5px 5px 2px 2px; background: linear-gradient(0deg, #cdb8e2, #a481c3); }
+.bar .x_label, .bar.vertical .line .x_label { color: var(--sk-ink-3); font-family: inherit; }
+
+/* --- Rating stars ------------------------------------------------------- */
+.b-rate .stars.score { color: #a77fc2; }
+.b-rate .stars.background { color: #e7dcf0; }
+.b-rate .stars.hover { color: var(--sk-sakura); }
+.b-rate .text-score .score-value { color: var(--sk-plum-deep); font-weight: 750; }
+.b-rate .text-score .score-notice { color: var(--sk-ink-3); }
+
+/* --- "Add to list" dropdown -------------------------------------------- */
+.b-add_to_list {
+  overflow: hidden;
+  border: 1px solid var(--sk-line-strong);
+  border-radius: var(--sk-r-s);
+  background: var(--sk-surface-strong);
+}
+.b-add_to_list .trigger, .b-add_to_list .option { transition: background-color var(--sk-fast) ease; }
+.b-add_to_list .option:hover, .b-add_to_list .trigger-arrow:hover { background: var(--sk-tint); }
+.b-add_to_list.watching .trigger { box-shadow: inset 3px 0 0 var(--sk-watching); }
+.b-add_to_list.completed .trigger { box-shadow: inset 3px 0 0 var(--sk-completed); }
+.b-add_to_list.planned .trigger { box-shadow: inset 3px 0 0 var(--sk-planned); }
+.b-add_to_list.on_hold .trigger { box-shadow: inset 3px 0 0 var(--sk-on-hold); }
+.b-add_to_list.dropped .trigger { box-shadow: inset 3px 0 0 var(--sk-dropped); }
+.b-add_to_list .expanded-options { border-top: 1px solid var(--sk-line); }
+
+/* --- Stats bar (profile / lists) --------------------------------------- */
+.b-stats_bar .bar { overflow: hidden; border-radius: 999px; background: var(--sk-tint-2); }
+.b-stats_bar.anime .bar .first, .b-stats_bar.manga .bar .first { background: var(--sk-grad); }
+.b-stats_bar .bar .second { background: #d7c1e6; }
+.b-stats_bar .bar .third { background: #c4b5d3; }
+.b-stats_bar a.title { margin: 0; padding: 0; background: none; }
