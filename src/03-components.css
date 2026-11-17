@@ -50,6 +50,10 @@ h2.headline.blue.m10, h2.subheadline.orange.m10, h2.subheadline.green.m10 { bord
 .b-options-floated { color: var(--sk-ink-4); font-size: 11px; }
 .b-options-floated a { color: var(--sk-ink-3); }
 .b-options-floated a:hover { color: var(--sk-link-hover); }
+/* The site marks the current option in orange; keep it in the palette */
+body .b-options-floated .selected, body .b-options-floated .link.selected { color: var(--sk-plum-deep) !important; font-weight: 650; }
+body .b-list_switchers .switcher { color: var(--sk-ink-3) !important; }
+body .b-list_switchers .switcher.selected { color: var(--sk-plum) !important; }
 
 /* --- Buttons ------------------------------------------------------------ */
 .b-button, .b-form input[type=submit], input[type=submit].b-button, .b-forums .create-topic {
@@ -120,23 +124,69 @@ h2.headline.blue.m10, h2.subheadline.orange.m10, h2.subheadline.green.m10 { bord
 }
 
 /* --- Tags & chips ------------------------------------------------------- */
-.b-tag {
-  display: inline-block;
-  margin: 2px 3px 2px 0;
-  padding: 1px 8px;
+/* Genre / kind / year tags. The site gives linked tags a blue dashed
+   underline and changes their margins on hover (the row jumps), so both
+   states are pinned to the same box. */
+body .b-tag, body .b-tag[href], body .b-tag[href]:hover, body .b-tag.active[href] {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 24px;
+  margin: 2px 4px 2px 0;
+  padding: 0 10px;
   border: 1px solid var(--sk-line);
   border-radius: 999px;
-  background: var(--sk-surface-strong);
+  background: rgba(255, 255, 255, .78);
   color: var(--sk-ink-2);
-  font-size: 11.5px;
-  line-height: 1.8;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1;
   text-decoration: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  transition: background-color var(--sk-fast) ease, border-color var(--sk-fast) ease, color var(--sk-fast) ease;
 }
-.b-tag:hover { border-color: var(--sk-line-strong); background: var(--sk-tint); color: var(--sk-plum-deep); }
-.b-tag[href$="/9-Ecchi"], .b-tag[href$="/r_plus"] { border-color: #f2c4d3; background: #fff3f6; }
-.b-tag[href$="/12-Hentai"], .b-tag[href$="/rx"] { border-color: #ee9fb5; background: #ffe9ef; color: #a23c63; }
-.b-anime_status_tag { border-radius: var(--sk-r-xs); }
-span.other-names { border: 1px solid var(--sk-line) !important; border-radius: 999px; background: var(--sk-tint) !important; }
+body .b-tag[href]:hover, body .b-tag.active[href] { border-color: rgba(144, 100, 182, .32); background: var(--sk-plum-soft); color: var(--sk-plum-ink); }
+body .b-tag[href]:active { background: var(--sk-tint-2); }
+body .b-tag[href$="/9-Ecchi"], body .b-tag[href$="/r_plus"] { border-color: rgba(223, 120, 145, .3); background: var(--sk-coral-soft); color: var(--sk-coral-ink); }
+body .b-tag[href$="/12-Hentai"], body .b-tag[href$="/rx"] { border-color: rgba(223, 120, 145, .5); background: #fbdde5; color: var(--sk-coral-ink); }
+
+/* Status chips: ongoing / released / announced, studio, relation, review mood.
+   Soft tinted pills instead of the site's saturated blocks. Colours go
+   through variables + !important so the site's hover/active rules
+   (higher specificity) cannot repaint them. */
+body .b-anime_status_tag {
+  --c-bg: var(--sk-tint-2);
+  --c-bd: transparent;
+  --c-ink: var(--sk-ink-2);
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 22px;
+  margin: 2px 4px 2px 0;
+  padding: 0 9px;
+  border: 1px solid var(--c-bd) !important;
+  border-radius: 999px;
+  background: var(--c-bg) !important;
+  color: var(--c-ink) !important;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  transition: filter var(--sk-fast) ease;
+}
+body .b-anime_status_tag:is(.released, .review-positive) { --c-bg: var(--sk-mint-soft); --c-bd: rgba(74, 165, 150, .28); --c-ink: var(--sk-mint-ink); }
+body .b-anime_status_tag:is(.ongoing, .review-neutral) { --c-bg: var(--sk-sky-soft); --c-bd: rgba(111, 147, 220, .3); --c-ink: var(--sk-sky-ink); }
+body .b-anime_status_tag:is(.anons, .news) { --c-bg: var(--sk-honey-soft); --c-bd: rgba(217, 162, 67, .32); --c-ink: var(--sk-honey-ink); }
+body .b-anime_status_tag:is(.discontinued, .review-negative) { --c-bg: var(--sk-coral-soft); --c-bd: rgba(223, 120, 145, .3); --c-ink: var(--sk-coral-ink); }
+body .b-anime_status_tag:is(.paused, .contest) { --c-bg: var(--sk-plum-soft); --c-bd: rgba(144, 100, 182, .28); --c-ink: var(--sk-plum-ink); }
+body .b-anime_status_tag:is(.studio, .episode, .review) { --c-bg: rgba(255, 255, 255, .78); --c-bd: var(--sk-line); --c-ink: var(--sk-ink-2); }
+body a.b-anime_status_tag[href]:hover { filter: brightness(.96) saturate(1.1); }
 
 /* --- Avatars & logos ---------------------------------------------------- */
 .b-user16 img, .b-comment > .inner header img, .b-dialog > .inner header img,
@@ -287,26 +337,88 @@ body.p-animes .b-db_entry > .c-image img { box-shadow: 0 2px 8px rgba(60, 28, 80
 .b-rate .text-score .score-notice { color: var(--sk-ink-3); }
 
 /* --- "Add to list" dropdown -------------------------------------------- */
-.b-add_to_list {
+/* The site caps the trigger at 180-227px while the wrapper stays full
+   width, so any frame on the wrapper looked stretched. Here the wrapper
+   is the pill and the trigger fills it; contexts cap the wrapper. */
+body .b-add_to_list {
+  --st: var(--sk-plum);
+  --st-soft: var(--sk-plum-soft);
+  --st-ink: var(--sk-plum-ink);
+  box-sizing: border-box;
   overflow: hidden;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin-bottom: 0;
   border: 1px solid var(--sk-line-strong);
   border-radius: var(--sk-r-s);
   background: var(--sk-surface-strong);
 }
-.b-add_to_list .trigger, .b-add_to_list .option { transition: background-color var(--sk-fast) ease; }
-.b-add_to_list .option:hover, .b-add_to_list .trigger-arrow:hover { background: var(--sk-tint); }
-.b-add_to_list.watching .trigger { box-shadow: inset 3px 0 0 var(--sk-watching); }
-.b-add_to_list.completed .trigger { box-shadow: inset 3px 0 0 var(--sk-completed); }
-.b-add_to_list.planned .trigger { box-shadow: inset 3px 0 0 var(--sk-planned); }
-.b-add_to_list.on_hold .trigger { box-shadow: inset 3px 0 0 var(--sk-on-hold); }
-.b-add_to_list.dropped .trigger { box-shadow: inset 3px 0 0 var(--sk-dropped); }
-.b-add_to_list .expanded-options { border-top: 1px solid var(--sk-line); }
+body .b-add_to_list.watching, body .b-add_to_list.rewatching { --st: var(--sk-watching); --st-soft: var(--sk-mint-soft); --st-ink: var(--sk-mint-ink); }
+body .b-add_to_list.completed { --st: var(--sk-completed); --st-soft: var(--sk-plum-soft); --st-ink: var(--sk-plum-ink); }
+body .b-add_to_list.planned { --st: var(--sk-planned); --st-soft: var(--sk-sky-soft); --st-ink: var(--sk-sky-ink); }
+body .b-add_to_list.on_hold { --st: var(--sk-on-hold); --st-soft: var(--sk-honey-soft); --st-ink: var(--sk-honey-ink); }
+body .b-add_to_list.dropped { --st: var(--sk-dropped); --st-soft: var(--sk-coral-soft); --st-ink: var(--sk-coral-ink); }
+/* Not in the list yet: neutral, inviting */
+body .b-add_to_list:has(> form > .trigger .plus) { --st: var(--sk-lilac); --st-soft: rgba(255, 255, 255, .9); --st-ink: var(--sk-plum); }
+
+body .b-add_to_list .trigger, body .b-add_to_list .option {
+  box-sizing: border-box;
+  max-width: none !important;
+  padding: 0 6px 0 10px !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--sk-ink-2) !important;
+  font-family: inherit;
+  font-size: 13px !important;
+  font-weight: 600;
+  line-height: 32px;
+  transition: background-color var(--sk-fast) ease;
+}
+body .b-add_to_list .trigger {
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+  overflow: hidden;
+  background: var(--st-soft) !important;
+  color: var(--st-ink) !important;
+  box-shadow: inset 4px 0 0 var(--st);
+  white-space: nowrap;
+}
+body .b-add_to_list .trigger > .trigger-arrow { order: 2; flex: 0 0 auto; float: none; margin-left: auto; }
+body .b-add_to_list .trigger > :not(.trigger-arrow) { flex: 1 1 auto; min-width: 0; }
+body .b-add_to_list .trigger > .text { display: flex; align-items: center; overflow: hidden; }
+body .b-add_to_list .trigger > .text .status-name { overflow: hidden; text-overflow: ellipsis; }
+body .b-add_to_list .trigger:hover { filter: brightness(.98) saturate(1.06); }
+body .b-add_to_list .edit, body .b-add_to_list .plus { color: inherit !important; }
+body .b-add_to_list .edit-trigger { display: flex; align-items: center; min-width: 0; }
+body .b-add_to_list .edit-trigger .text { overflow: hidden; min-width: 0; text-overflow: ellipsis; white-space: nowrap; }
+body .b-add_to_list .trigger-arrow { color: var(--st-ink) !important; opacity: .6; }
+body .b-add_to_list .trigger-arrow::before { width: 22px !important; margin: 0; }
+body .b-add_to_list .trigger :is(.edit, .plus)::before { width: 22px !important; margin-right: 2px; }
+body .b-add_to_list .trigger-arrow:hover { opacity: 1; }
+body .b-add_to_list .expanded-options { border-top: 1px solid var(--sk-line); }
+body .b-add_to_list .option { font-weight: 500; }
+body .b-add_to_list .option + .option { border-top: 1px solid var(--sk-line) !important; }
+body .b-add_to_list .option:hover { background: var(--sk-tint) !important; color: var(--sk-plum-ink) !important; }
+
+/* Contexts with little room: a compact pill */
+.b-db_entry-variant-list_item .b-add_to_list,
+.b-catalog_entry-tooltip .b-add_to_list,
+.c-winner .b-add_to_list { width: auto; max-width: 240px; }
+.b-db_entry-variant-list_item .b-add_to_list .trigger,
+.b-db_entry-variant-list_item .b-add_to_list .option { font-size: 12px !important; line-height: 28px; }
+.b-review-topic .review-info .user-rate .b-add_to_list { width: auto; max-width: 180px; }
 
 /* --- Stats bar (profile / lists) --------------------------------------- */
-.b-stats_bar .bar { overflow: hidden; border-radius: 999px; background: var(--sk-tint-2); }
-.b-stats_bar.anime .bar .first, .b-stats_bar.manga .bar .first { background: var(--sk-grad); }
-.b-stats_bar .bar .second { background: #d7c1e6; }
-.b-stats_bar .bar .third { background: #c4b5d3; }
+/* Segments: completed / planned+watching+on hold / dropped.
+   Distinct hues and a hairline gap so neighbours never merge. */
+.b-stats_bar .bar { display: flex; overflow: hidden; border-radius: 999px; background: var(--sk-tint-2); }
+.b-stats_bar .bar > div { flex: 0 0 auto; min-width: 0; }
+.b-stats_bar .bar > div + div { box-shadow: inset 2px 0 0 rgba(255, 255, 255, .95); }
+body .b-stats_bar .bar .first { background: linear-gradient(90deg, #8a5cb0, #b071b0) !important; }
+body .b-stats_bar .bar .second { background: linear-gradient(90deg, #8eaae6, #a9bfef) !important; }
+body .b-stats_bar .bar .third { background: linear-gradient(90deg, #e6879f, #ee9fb3) !important; }
 .b-stats_bar a.title { margin: 0; padding: 0; background: none; }
 
 /* --- Sidebars: each section is its own card ------------------------------ */

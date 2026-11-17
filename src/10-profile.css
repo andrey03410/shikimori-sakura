@@ -152,9 +152,6 @@
 .p-profiles-show .profile-head .c-info .c-lists-info .b-stats_bar .compatibility a:hover { color: var(--sk-link-hover); }
 .p-profiles-show .profile-head .b-stats_bar .bar { height: 10px; line-height: 10px; border-radius: 999px; background: var(--sk-tint-2); }
 .p-profiles-show .profile-head .b-stats_bar .bar > div { font-size: 0; line-height: 10px; }
-.p-profiles-show .profile-head .b-stats_bar .bar .first { background: var(--sk-grad); }
-.p-profiles-show .profile-head .b-stats_bar .bar .second { background: #cdb6e3; }
-.p-profiles-show .profile-head .b-stats_bar .bar .third { background: #e2b3c8; }
 .p-profiles-show .profile-head .b-stats_bar .stat_names {
   display: flex;
   flex-wrap: wrap;

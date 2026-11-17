@@ -44,6 +44,11 @@
 .p-contests-index .contests li.contest a:hover { color: var(--sk-link-hover); }
 
 /* --- Contest page ------------------------------------------------------- */
+.p-contests {
+  --sk-gold: linear-gradient(135deg, #f0c66a, #d99a3a);
+  --sk-silver: linear-gradient(135deg, #c9c6d8, #9d98b4);
+  --sk-bronze: linear-gradient(135deg, #e3a98a, #c47e60);
+}
 .p-contests .l-page .head + .block .b-text_with_paragraphs { color: var(--sk-ink-2); }
 .p-contests .contest_round { position: relative; }
 .p-contests .contest_round > .b-options-floated {
@@ -83,7 +88,6 @@
     var(--sk-surface-strong);
   box-shadow: var(--sk-shadow-1), var(--sk-highlight);
 }
-.p-contests .b-contest_match .match-members { align-items: center; justify-content: center; gap: 28px; }
 .p-contests .b-contest_match .match-member {
   padding: 8px;
   border: 1px solid var(--sk-line);
@@ -143,7 +147,7 @@
 .p-contests .votes-percents .right-part > span { padding-right: 12px; }
 
 /* Round stats: rating + match lists */
-.p-contests .cc-round_stats { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 22px; margin-bottom: 22px; }
+.p-contests .cc-round_stats { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 22px; align-items: start; margin-bottom: 22px; }
 .p-contests .cc-round_stats::after { display: none; }
 .p-contests .cc-round_stats > .c-column {
   position: relative;
@@ -159,18 +163,23 @@
   box-shadow: var(--sk-shadow-1), var(--sk-highlight);
 }
 .p-contests .cc-round_stats > .c-column > .b-options-floated { position: absolute; right: 16px; top: 14px; }
+.p-contests .rating { display: flex; flex-direction: column; gap: 1px; }
 .p-contests .rating .member {
-  display: flex;
+  display: grid;
+  grid-template-columns: 24px 30px minmax(0, 1fr);
   align-items: center;
   gap: 8px;
-  padding: 5px 6px;
+  padding: 4px 6px;
   border-radius: var(--sk-r-xs);
   line-height: 1.4;
 }
-.p-contests .rating .member:nth-child(-n+3) .position { background: var(--sk-grad); color: #fff; }
 .p-contests .rating .member:hover { background: var(--sk-tint); }
+.p-contests .rating .member > .position { grid-area: 1 / 1; float: none; order: 0; }
+.p-contests .rating .member > .progress { grid-area: 1 / 2; order: 0; }
+.p-contests .rating .member > a { grid-area: 1 / 3; order: 0; }
 .p-contests .rating .member .position {
-  flex: 0 0 22px;
+  box-sizing: border-box;
+  width: 24px;
   height: 22px;
   border-radius: 7px;
   background: var(--sk-tint);
@@ -179,7 +188,26 @@
   font-weight: 750;
   line-height: 22px;
   text-align: center;
+  font-variant-numeric: tabular-nums;
 }
+.p-contests .rating .member .position::after { content: none !important; }
+.p-contests .rating .member:nth-child(1) .position { background: var(--sk-gold); color: #fff; }
+.p-contests .rating .member:nth-child(2) .position { background: var(--sk-silver); color: #fff; }
+.p-contests .rating .member:nth-child(3) .position { background: var(--sk-bronze); color: #fff; }
+/* Position change since last round: a small fixed-width delta so names align */
+.p-contests .rating .member .progress {
+  float: none;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  color: var(--sk-ink-4);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.p-contests .rating .member .progress.positive { color: var(--sk-mint-ink); }
+.p-contests .rating .member .progress.negative { color: var(--sk-coral-ink); }
 .p-contests .rating .member a { min-width: 0; overflow: hidden; color: var(--sk-ink); text-overflow: ellipsis; white-space: nowrap; }
 .p-contests .rating .member a:hover { color: var(--sk-link-hover); }
 .p-contests .match-day { display: flex; flex-direction: column; gap: 5px; }
@@ -209,9 +237,12 @@
 .p-contests .match-day .match-link > .c-column { display: flex; align-items: baseline; gap: 6px; float: none; width: auto; min-width: 0; margin: 0; }
 .p-contests .match-day .match-link > .c-column a { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .p-contests .match-day .match-link .winner a { color: var(--sk-ink); font-weight: 650; }
+.p-contests .match-day .match-link .c-column::before { flex: 0 0 auto; }
+.p-contests .match-day .match-link .winner::before { color: var(--sk-mint) !important; }
+.p-contests .match-day .match-link .loser::before { color: var(--sk-coral) !important; }
 .p-contests .match-day .match-link .loser a { color: var(--sk-ink-3); }
 .p-contests .match-day .match-link .matches-num { flex: 0 0 auto; color: var(--sk-ink-3); font-size: 11px; font-variant-numeric: tabular-nums; }
-.p-contests .match-day .match-link .winner .matches-num { color: var(--sk-plum); font-weight: 700; }
+.p-contests .match-day .match-link .winner .matches-num { color: var(--sk-mint-ink); font-weight: 700; }
 .p-contests .match-day .match-link:hover { border-color: var(--sk-line-strong); background: #fff; }
 .p-contests .match-day .match-link.active { border-color: rgba(176, 104, 160, .45); background: #fff; box-shadow: inset 3px 0 0 var(--sk-sakura); }
 
@@ -224,15 +255,113 @@
 .p-contests .cc-4a.user_rates-minified::after { display: none; }
 .p-contests .cc-4a.user_rates-minified > .b-catalog_entry { float: none; width: auto; min-width: 0; margin: 0; }
 
+/* Bigger posters in the current match, closer to the "vs" */
+.p-contests .b-contest_match .match-members { display: flex; align-items: flex-start; justify-content: center; gap: 34px; }
+.p-contests .b-contest_match .vs { align-self: center; }
+.p-contests .b-contest_match .match-member .b-catalog_entry .cover .title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.p-contests .b-contest_match .match-member { flex: 0 1 190px; min-width: 0; }
+.p-contests .b-contest_match .match-member .b-catalog_entry { float: none; width: auto !important; margin: 0; }
+.p-contests .b-contest_match .match-member .b-catalog_entry .cover .title { white-space: normal; }
+.p-contests .b-contest_match .vs { flex: 0 0 auto; }
+.p-contests .match-losers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 18px; }
+.p-contests .match-losers::before, .p-contests .match-losers::after { content: none !important; }
+.p-contests .match-losers .losers { float: none; width: auto; margin: 0; }
+.p-contests .match-losers .cc-4a { display: flex; flex-wrap: wrap; gap: 6px; }
+.p-contests .match-losers .cc-4a::after { content: none; }
+.p-contests .match-losers .cc-4a > .b-catalog_entry { float: none; width: 48px !important; margin: 0; }
+
+/* --- Finished contest: results ------------------------------------------ */
+.p-contests .contest.finished .results > .subheadline { margin-top: 6px; }
+.p-contests .contest.finished .results > .subheadline:nth-child(1)::before { background: var(--sk-gold); width: 12px; height: 12px; top: .15em; border-radius: 50%; }
+.p-contests .contest.finished .results > .subheadline:nth-child(3)::before { background: var(--sk-silver); width: 12px; height: 12px; top: .15em; border-radius: 50%; }
+.p-contests .contest.finished .results > .subheadline:nth-child(5)::before { background: var(--sk-bronze); width: 12px; height: 12px; top: .15em; border-radius: 50%; }
+.p-contests .cc-result {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+  box-sizing: border-box;
+  margin-bottom: 26px;
+  padding: 18px;
+  border: 1px solid var(--sk-line);
+  border-radius: var(--sk-r-l);
+  background: var(--sk-surface);
+  box-shadow: var(--sk-shadow-1), var(--sk-highlight);
+}
+.p-contests .cc-result::before, .p-contests .cc-result::after { content: none !important; }
+.p-contests .cc-result > .c-winner, .p-contests .cc-result > .c-rounds { float: none; width: auto !important; min-width: 0; margin: 0 !important; }
+.p-contests .cc-result .c-winner > .b-catalog_entry {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 18px;
+  float: none;
+  width: auto !important;
+  max-width: none !important;
+  margin: 0;
+}
+.p-contests .cc-result .c-winner > .b-catalog_entry::after { content: none; }
+.p-contests .cc-result .c-winner .cover { float: none; width: auto !important; margin: 0; }
+.p-contests .cc-result .c-winner .content { float: none; width: auto !important; min-width: 0; margin: 0; }
+.p-contests .cc-result .c-winner :is(.b-catalog_entry-tooltip, .entry-tooltip_container, .inner) { position: static; width: auto !important; max-width: none !important; margin: 0; padding: 0; border: 0; background: none; box-shadow: none; }
+.p-contests .cc-result .c-winner .b-add_to_list { padding-bottom: 0 !important; }
+.p-contests .cc-result .c-winner .b-catalog_entry-tooltip .inner { padding: 0; }
+.p-contests .cc-result .c-winner .line.name { margin-bottom: 6px; font-size: 15px; font-weight: 700; }
+.p-contests .cc-result .c-winner .text { margin-bottom: 8px; color: var(--sk-ink-2); font-size: 12.5px; line-height: 1.6; }
+.p-contests .cc-result .c-winner .line { display: flex; flex-wrap: wrap; align-items: center; gap: 0 6px; }
+.p-contests .cc-result .c-winner .line .key { flex: 0 0 auto; float: none; width: auto; margin: 0; color: var(--sk-ink-3); font-size: 12px; }
+.p-contests .cc-result .c-winner .line .value { display: flex; flex-wrap: wrap; align-items: center; flex: 1 1 0; float: none; min-width: 0; margin: 0; }
+.p-contests .cc-result .c-rounds .label { margin-bottom: 8px; color: var(--sk-ink-3); font-size: 11px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+.p-contests .cc-result .c-rounds .match-day { gap: 2px; }
+.p-contests .cc-result .c-rounds .match { display: grid; grid-template-columns: 34px minmax(0, 1fr); align-items: center; gap: 8px; min-height: 24px; }
+.p-contests .cc-result .c-rounds .match > a:last-child { overflow: hidden; min-width: 0; color: var(--sk-ink-2); font-size: 12.5px; text-overflow: ellipsis; white-space: nowrap; }
+.p-contests .cc-result .c-rounds .match > a:last-child:hover { color: var(--sk-link-hover); }
+.p-contests .cc-result .c-rounds .match-link {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: var(--sk-tint);
+  color: var(--sk-ink-3);
+  font-size: 10.5px;
+  font-weight: 750;
+  line-height: 20px;
+  font-variant-numeric: tabular-nums;
+}
+.p-contests .cc-result .c-rounds .match-link::before, .p-contests .cc-result .c-rounds .match-link::after,
+.p-contests .cc-result .c-rounds .match-link *::before, .p-contests .cc-result .c-rounds .match-link *::after { content: none !important; }
+.p-contests .cc-result .c-rounds .match-link .winner { color: var(--sk-mint-ink); }
+.p-contests .cc-result .c-rounds .match-link .loser { color: var(--sk-coral-ink); }
+.p-contests .cc-result .c-rounds .match-link:has(.winner) { background: var(--sk-mint-soft); }
+.p-contests .cc-result .c-rounds .match-link:has(.loser) { background: var(--sk-coral-soft); }
+.p-contests .cc-result .c-rounds .match-link .group { display: inline-flex !important; gap: 1px; align-self: auto; margin: 0; padding: 0; background: none; color: inherit; font-size: inherit; }
+
 @media screen and (max-width: 1023px) {
   .p-contests .cc-round_stats { grid-template-columns: minmax(0, 1fr); }
+  .p-contests .cc-result { grid-template-columns: minmax(0, 1fr); }
 }
 @media screen and (max-width: 767px) {
   .p-contests-index .contests ol { grid-template-columns: minmax(0, 1fr); }
   .p-contests .contest_round > .b-options-floated { position: static; justify-content: flex-end; margin-bottom: 8px; }
   .p-contests .match-container { padding: 14px 10px; }
   .p-contests .b-contest_match .match-members { gap: 10px; }
-  .p-contests .b-contest_match .match-member { padding: 5px; }
+  .p-contests .b-contest_match .match-member { flex: 1 1 0; padding: 5px; }
+  .p-contests .b-contest_match :is(.prev-match, .next-match) { width: 26px !important; }
+  .p-contests .b-contest_match .vs { flex: 0 1 64px; min-width: 40px; }
+  .p-contests .b-contest_match .vs .hint { font-size: 10px; line-height: 1.3; }
   .p-contests .b-contest_match .vs .label { width: 40px; height: 40px; font-size: 12px; }
   .p-contests .match-day .match-link { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .p-contests .match-losers { gap: 10px; }
+  .p-contests .match-losers .losers { text-align: left; }
+  .p-contests .match-losers .subheadline { font-size: 10px; letter-spacing: .06em; }
+  .p-contests .cc-result { padding: 12px; }
+  .p-contests .cc-result .c-winner > .b-catalog_entry { grid-template-columns: 96px minmax(0, 1fr); gap: 12px; }
 }

@@ -56,7 +56,7 @@
 #user_rates_index .b-options-floated.mylist a::after { display: none; }
 #user_rates_index .b-options-floated.mylist a[data-id="planned"] { --sk-state: var(--sk-planned); }
 #user_rates_index .b-options-floated.mylist a[data-id="watching"] { --sk-state: var(--sk-watching); }
-#user_rates_index .b-options-floated.mylist a[data-id="rewatching"] { --sk-state: #5fa6c4; }
+#user_rates_index .b-options-floated.mylist a[data-id="rewatching"] { --sk-state: #7cc2b6; }
 #user_rates_index .b-options-floated.mylist a[data-id="completed"] { --sk-state: var(--sk-completed); }
 #user_rates_index .b-options-floated.mylist a[data-id="on_hold"] { --sk-state: var(--sk-on-hold); }
 #user_rates_index .b-options-floated.mylist a[data-id="dropped"] { --sk-state: var(--sk-dropped); }
@@ -261,8 +261,13 @@
   #user_rates_index .l-page > div > .block { position: static; }
   #user_rates_index .list-posters { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 }
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  #user_rates_index .b-options-floated.mylist { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; }
+  #user_rates_index .b-options-floated.mylist a { justify-content: flex-start; padding: 8px 10px; }
+  #user_rates_index .b-options-floated.mylist a span { margin-left: auto; }
+}
 @media screen and (max-width: 767px) {
-  #user_rates_index .b-options-floated.mylist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #user_rates_index .b-options-floated.mylist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible; }
   #user_rates_index .b-options-floated.mylist a { justify-content: flex-start; padding: 8px 10px; font-size: 11px; }
   #user_rates_index .b-options-floated.mylist a span { margin-left: auto; }
   #user_rates_index .list-groups > header .subheadline { padding-right: 100px; }

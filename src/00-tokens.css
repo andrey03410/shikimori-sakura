@@ -30,12 +30,20 @@
   --sk-line-strong: rgba(117, 74, 140, .24);
   --sk-highlight: inset 0 1px 0 rgba(255, 255, 255, .75);
 
-  /* Status */
-  --sk-watching: #4f9a8e;
-  --sk-completed: #8c62b0;
-  --sk-planned: #7f86b9;
-  --sk-on-hold: #b38b45;
-  --sk-dropped: #c0688a;
+  /* Secondary accents. Used sparingly: statuses, deltas, medals.
+     Each has a solid tone, a soft background and a readable ink. */
+  --sk-mint: #4aa596;      --sk-mint-soft: #e3f3ef;   --sk-mint-ink: #2b7a6d;
+  --sk-sky: #6f93dc;       --sk-sky-soft: #e7eefb;    --sk-sky-ink: #3e62ad;
+  --sk-honey: #d9a243;     --sk-honey-soft: #fbf1dd;  --sk-honey-ink: #94661a;
+  --sk-coral: #df7891;     --sk-coral-soft: #fce9ee;  --sk-coral-ink: #b04563;
+  --sk-plum-soft: #f1e7f8; --sk-plum-ink: #74479a;
+
+  /* Status: one hue per list status */
+  --sk-watching: var(--sk-mint);
+  --sk-completed: #9064b6;
+  --sk-planned: var(--sk-sky);
+  --sk-on-hold: var(--sk-honey);
+  --sk-dropped: var(--sk-coral);
 
   /* Shape & depth */
   --sk-r-xs: 6px;

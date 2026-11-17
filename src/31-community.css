@@ -27,25 +27,51 @@
 .p-clubs-index .b-clubs.index > .b-clubs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 26px; }
 .p-clubs-index .b-clubs.index > .b-clubs::before,
 .p-clubs-index .b-clubs.index > .b-clubs::after { display: none; }
-.b-club.detailed {
+/* The site sizes cards as 30% of the row (and 48% on tablets) with a 4%
+   right margin. Inside a grid cell that left ~120px per card. */
+body .b-clubs .b-club.detailed {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  grid-template-areas: "card card" "info info" "author author";
+  align-content: start;
+  gap: 8px 12px;
   box-sizing: border-box;
   float: none;
-  width: auto;
+  width: auto !important;
   min-width: 0;
   height: auto;
-  min-height: 92px;
-  margin: 0;
-  padding: 16px;
+  min-height: 0;
+  margin: 0 !important;
+  padding: 14px 16px;
   border: 1px solid var(--sk-line);
   border-radius: var(--sk-r-l);
   background: var(--sk-surface);
   transition: border-color var(--sk-fast) ease, background-color var(--sk-fast) ease, box-shadow var(--sk-dur) ease;
 }
-.b-club.detailed:hover { border-color: var(--sk-line-strong); background: #fff; box-shadow: var(--sk-shadow-2); }
-.b-club .logo { box-shadow: 0 2px 8px rgba(60, 28, 80, .12); }
-.b-club .name { white-space: normal; overflow-wrap: anywhere; color: var(--sk-ink); font-size: 14px; font-weight: 650; line-height: 1.4; }
-.b-club .info { color: var(--sk-ink-3); font-size: 11px; line-height: 1.7; }
-.b-club .info .number { color: var(--sk-plum); }
+body .b-clubs .b-club.detailed:hover { border-color: var(--sk-line-strong); background: var(--sk-surface-strong); box-shadow: var(--sk-shadow-1); }
+.b-club.detailed .name-logo { grid-area: card; display: grid; grid-template-columns: 48px minmax(0, 1fr); align-items: center; gap: 12px; min-width: 0; }
+.b-club.detailed .name-logo .logo { float: none; width: 48px; height: 48px; margin: 0; object-fit: cover; }
+.b-club.detailed .info { grid-area: info; margin: 0; }
+.b-club.detailed .info.author { grid-area: author; }
+.b-club .logo { border-radius: var(--sk-r-s); box-shadow: 0 2px 8px rgba(60, 28, 80, .12); }
+.b-club .name {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  color: var(--sk-ink);
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+.b-club .name-logo:hover .name { color: var(--sk-link-hover); }
+.b-club .info { color: var(--sk-ink-3); font-size: 11.5px; line-height: 1.6; }
+.b-club .info .grouped { margin-right: 10px; }
+.b-club .info .grouped::after { content: none !important; }
+.b-club .info .grouped:has(> .number:empty) { display: none; }
+.b-club .info .number { margin-right: 3px; color: var(--sk-plum); font-weight: 700; }
 
 /* User directory */
 #users_index .b-search-results { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
