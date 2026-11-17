@@ -3,9 +3,6 @@
    ========================================================================== */
 .p-achievements .block2 { position: relative; margin-bottom: 28px; }
 .p-achievements .l-page .block.is-own-profile { position: relative; }
-body.p-achievements .l-page .b-options-floated { position: absolute; z-index: 2; top: -4px; right: 0; float: none; width: auto; margin: 0; padding: 0; }
-body.p-achievements .l-page .b-options-floated.before-buttons-3 { right: 120px; }
-.p-achievements .b-list_switchers .switcher { box-sizing: border-box; width: 28px; height: 28px; padding: 3px; }
 
 .p-achievements .cc-achievements { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .p-achievements .cc-achievements::after,

@@ -183,7 +183,7 @@ body .b-anime_status_tag {
 body .b-anime_status_tag:is(.released, .review-positive) { --c-bg: var(--sk-mint-soft); --c-bd: rgba(74, 165, 150, .28); --c-ink: var(--sk-mint-ink); }
 body .b-anime_status_tag:is(.ongoing, .review-neutral) { --c-bg: var(--sk-sky-soft); --c-bd: rgba(111, 147, 220, .3); --c-ink: var(--sk-sky-ink); }
 body .b-anime_status_tag:is(.anons, .news) { --c-bg: var(--sk-honey-soft); --c-bd: rgba(217, 162, 67, .32); --c-ink: var(--sk-honey-ink); }
-body .b-anime_status_tag:is(.discontinued, .review-negative) { --c-bg: var(--sk-coral-soft); --c-bd: rgba(223, 120, 145, .3); --c-ink: var(--sk-coral-ink); }
+body .b-anime_status_tag:is(.discontinued, .review-negative, .spoilers) { --c-bg: var(--sk-coral-soft); --c-bd: rgba(223, 120, 145, .3); --c-ink: var(--sk-coral-ink); }
 body .b-anime_status_tag:is(.paused, .contest) { --c-bg: var(--sk-plum-soft); --c-bd: rgba(144, 100, 182, .28); --c-ink: var(--sk-plum-ink); }
 body .b-anime_status_tag:is(.studio, .episode, .review) { --c-bg: rgba(255, 255, 255, .78); --c-bd: var(--sk-line); --c-ink: var(--sk-ink-2); }
 body a.b-anime_status_tag[href]:hover { filter: brightness(.96) saturate(1.1); }
@@ -246,6 +246,23 @@ body.p-animes .b-db_entry > .c-image img { box-shadow: 0 2px 8px rgba(60, 28, 80
   background: #fde5f1;
   color: #b04b80;
 }
+/* The site paints the "новое" label itself on ::before (blue block):
+   the pill lives there */
+body .b-new_marker { background: transparent !important; }
+body .b-new_marker::before {
+  display: inline-block;
+  padding: 0 8px;
+  border: 0 !important;
+  border-radius: 999px;
+  background: #fde5f1 !important;
+  color: #b04b80 !important;
+  line-height: 18px;
+  font-family: inherit;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+body .b-new_marker.off::before { background: transparent !important; box-shadow: inset 0 0 0 1px var(--sk-line-strong); color: var(--sk-ink-4) !important; }
 .b-comments .comments-hider, .b-comments .comments-expander, .b-comments .comments-loader,
 .collapsed, .collapsed + .spoiler .hide-expanded {
   border: 1px dashed var(--sk-line-strong) !important;
@@ -262,7 +279,8 @@ body.p-animes .b-db_entry > .c-image img { box-shadow: 0 2px 8px rgba(60, 28, 80
 }
 .b-quote, blockquote {
   padding: 10px 14px;
-  border-left: 3px solid var(--sk-lilac);
+  border: 0 !important;
+  border-left: 3px solid var(--sk-lilac) !important;
   border-radius: 0 var(--sk-r-s) var(--sk-r-s) 0;
   background: var(--sk-surface-sunk);
   color: var(--sk-ink-2);
@@ -301,6 +319,63 @@ body.p-animes .b-db_entry > .c-image img { box-shadow: 0 2px 8px rgba(60, 28, 80
 .b-list_switchers .switcher { border-radius: var(--sk-r-xs); color: var(--sk-ink-3); transition: background-color var(--sk-fast), color var(--sk-fast); }
 .b-list_switchers .switcher:hover { color: var(--sk-plum); background: var(--sk-tint); }
 .b-list_switchers .switcher.selected { color: var(--sk-plum-deep); background: var(--sk-tint-2); }
+
+/* Subheadline toolbar: switchers as one segmented control, and the
+   options/count that the site parks before them as a pill on the same line.
+   The site reserves room with padding sized for its tiny icons, so the
+   count used to slide under the buttons. */
+.subheadline-buttons { top: auto; right: 0; z-index: 2; margin-top: -6px; }
+.subheadline-buttons .b-list_switchers {
+  display: flex;
+  gap: 2px;
+  margin: 0;
+  padding: 3px;
+  border: 1px solid var(--sk-line);
+  border-radius: var(--sk-r-s);
+  background: var(--sk-surface-strong);
+}
+.subheadline-buttons .b-list_switchers .switcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 28px;
+  height: 24px;
+  margin: 0 !important;
+  padding: 0;
+}
+.subheadline-buttons .b-list_switchers .switcher::before { width: auto; margin: 0; font-size: 13px; line-height: 1; }
+.subheadline-buttons .b-list_switchers .switcher::after { display: none; }
+body .b-options-floated[class*="before-buttons-"] {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  float: none;
+  height: 24px;
+  margin: -2px 0 0;
+  padding: 0 !important;
+}
+body .b-options-floated.before-buttons-1 { right: 50px; }
+body .b-options-floated.before-buttons-2 { right: 80px; }
+body .b-options-floated.before-buttons-3 { right: 110px; }
+body .b-options-floated.before-buttons-4 { right: 140px; }
+/* A lone count ("14 / 286") reads as a pill */
+body .b-options-floated[class*="before-buttons-"] > a:only-child {
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--sk-tint);
+  color: var(--sk-ink-2);
+  font-size: 11.5px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+body .b-options-floated[class*="before-buttons-"] > a:only-child:hover { background: var(--sk-tint-2); color: var(--sk-plum-ink); }
+@media screen and (max-width: 767px) {
+  body .b-options-floated[class*="before-buttons-"] { position: static; justify-content: flex-end; margin: 0 0 8px !important; }
+  .subheadline-buttons { margin-top: -4px; }
+}
 
 /* --- Tooltips ----------------------------------------------------------- */
 .tooltip-inner, .b-tooltip .inner {
@@ -413,12 +488,12 @@ body .b-add_to_list .option:hover { background: var(--sk-tint) !important; color
 /* --- Stats bar (profile / lists) --------------------------------------- */
 /* Segments: completed / planned+watching+on hold / dropped.
    Distinct hues and a hairline gap so neighbours never merge. */
-.b-stats_bar .bar { display: flex; overflow: hidden; border-radius: 999px; background: var(--sk-tint-2); }
-.b-stats_bar .bar > div { flex: 0 0 auto; min-width: 0; }
-.b-stats_bar .bar > div + div { box-shadow: inset 2px 0 0 rgba(255, 255, 255, .95); }
-body .b-stats_bar .bar .first { background: linear-gradient(90deg, #8a5cb0, #b071b0) !important; }
-body .b-stats_bar .bar .second { background: linear-gradient(90deg, #8eaae6, #a9bfef) !important; }
-body .b-stats_bar .bar .third { background: linear-gradient(90deg, #e6879f, #ee9fb3) !important; }
+.b-stats_bar:not(.lifetime) .bar { display: flex; overflow: hidden; border-radius: 999px; background: var(--sk-tint-2); }
+.b-stats_bar:not(.lifetime) .bar > div { flex: 0 0 auto; min-width: 0; }
+.b-stats_bar:not(.lifetime) .bar > div + div { box-shadow: inset 2px 0 0 rgba(255, 255, 255, .95); }
+body .b-stats_bar:not(.lifetime) .bar .first { background: linear-gradient(90deg, #8a5cb0, #b071b0) !important; }
+body .b-stats_bar:not(.lifetime) .bar .second { background: linear-gradient(90deg, #8eaae6, #a9bfef) !important; }
+body .b-stats_bar:not(.lifetime) .bar .third { background: linear-gradient(90deg, #e6879f, #ee9fb3) !important; }
 .b-stats_bar a.title { margin: 0; padding: 0; background: none; }
 
 /* --- Sidebars: each section is its own card ------------------------------ */

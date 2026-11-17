@@ -81,10 +81,6 @@
 #user_rates_index .b-options-floated.mylist a.active span { background: var(--sk-tint); color: var(--sk-plum); }
 
 #user_rates_index .l-content > .subheadline { padding-right: 90px; }
-#user_rates_index .subheadline-buttons { position: absolute; right: 0; margin-top: -4px; z-index: 2; }
-#user_rates_index .b-list_switchers { display: flex; gap: 2px; margin: 0; padding: 3px; border: 1px solid var(--sk-line); border-radius: var(--sk-r-s); background: var(--sk-surface-strong); }
-#user_rates_index .b-list_switchers .switcher { display: block; margin: 0 !important; padding: 0 4px; }
-#user_rates_index .b-list_switchers .switcher::before { width: 22px; font-size: 13px; line-height: 24px; }
 
 #user_rates_index .b-collection_search .field { margin: 0 0 18px; }
 

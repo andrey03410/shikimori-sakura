@@ -12,13 +12,13 @@
 Откройте **Настройки → Стиль** (`https://shikimori.io/<ник>/edit/styles`) и вставьте:
 
 ```css
-@import url("https://raw.githubusercontent.com/andrey03410/shikimori-sakura/v1.1.0/dist/sakura.css");
+@import url("https://raw.githubusercontent.com/andrey03410/shikimori-sakura/v1.2.0/dist/sakura.css");
 ```
 
 Личные дополнения подключаются отдельной строкой ниже. Например, анимированные значки франшиз:
 
 ```css
-@import url("https://raw.githubusercontent.com/andrey03410/shikimori-sakura/v1.1.0/dist/andrey03410.css");
+@import url("https://raw.githubusercontent.com/andrey03410/shikimori-sakura/v1.2.0/dist/andrey03410.css");
 ```
 
 ## Как Shikimori обрабатывает стиль (важно для обновлений)
@@ -26,7 +26,7 @@
 Это проверено по исходникам сайта: `app/services/styles/*`, `app/models/style.rb`.
 
 - `@import` скачивается **сервером** Shikimori **один раз, при сохранении** настроек, и встраивается в страницу. Скачивание кэшируется на 8 часов по адресу ссылки.
-  Поэтому push в репозиторий профиль сам не обновит. В ссылке всегда указана версия (`v1.1.0`). Чтобы обновить тему, поменяйте версию в ссылке и сохраните настройки.
+  Поэтому push в репозиторий профиль сам не обновит. В ссылке всегда указана версия (`v1.2.0`). Чтобы обновить тему, поменяйте версию в ссылке и сохраните настройки.
 - Репозиторий должен быть публичным: сервер скачивает файл без авторизации.
 - `@import` внутри скачанного файла вырезается, поэтому тема собирается в один файл.
 - Фильтр сайта вырезает слова `eval`, `cookie`, `window`, `parent`, `this`, `script`, `behavior`, `expression` и др., а также символ `<`, `&#`, комментарии и `data:`-ссылки не в base64. Из-за этого, например, `scroll-behavior` превращается в `scroll-`.
@@ -61,7 +61,7 @@ document.getElementById("custom_css").textContent = css.join("\n");
 **Выпуск версии.**
 
 1. Поднимите номер в `VERSION`.
-2. Выполните `python3 build.py`, закоммитьте, затем `git tag vX.Y.Z && git push --follow-tags`.
+2. Выполните `python3 build.py`, закоммитьте, затем `git tag -a vX.Y.Z -m "..."` и `git push origin HEAD vX.Y.Z` (тег должен быть аннотированным).
 3. Поменяйте версию в ссылках в настройках стиля и сохраните.
 
 ## Благодарности

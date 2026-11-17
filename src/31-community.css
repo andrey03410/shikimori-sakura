@@ -13,9 +13,71 @@
   box-shadow: var(--sk-shadow-1), var(--sk-highlight);
 }
 .b-topic > .inner > header .name, .b-topic header .name { color: var(--sk-plum-deep); font-weight: 650; }
-.b-topic header img { border-radius: 50%; }
+.b-topic header img { border-radius: var(--sk-r-s); object-fit: cover; }
 .b-topic .body { color: var(--sk-ink-2); line-height: 1.7; }
 .b-topic .footer-vote, .b-topic .footer { color: var(--sk-ink-3); }
+
+/* Comments inside a topic card: one surface, not cards inside a card */
+.b-topic .b-comments .b-comment {
+  margin-bottom: 6px;
+  border-color: transparent;
+  background: rgba(248, 242, 251, .72);
+}
+.b-topic .b-comments .b-comment:hover { border-color: var(--sk-line); background: rgba(255, 255, 255, .9); }
+.b-topic .b-comments { margin-top: 12px; }
+
+/* "Темы дня": a quiet chip rail */
+.b-hot_topics-v2 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin: 0 0 20px;
+  padding: 5px;
+  border: 1px solid var(--sk-line);
+  border-radius: 999px;
+  background: var(--sk-surface);
+  box-shadow: var(--sk-shadow-1), var(--sk-highlight);
+}
+.b-hot_topics-v2 .subject {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 8px 0 12px;
+  color: var(--sk-ink-2);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.b-hot_topics-v2 > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 1 auto;
+  min-width: 0;
+  height: 28px;
+  margin: 0;
+  padding: 0 12px 0 4px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .7);
+  color: var(--sk-ink-2);
+  font-size: 12px;
+  white-space: nowrap;
+  transition: background-color var(--sk-fast) ease, color var(--sk-fast) ease;
+}
+.b-hot_topics-v2 > a:hover { background: var(--sk-tint); color: var(--sk-plum-ink); }
+.b-hot_topics-v2 > a .poster { flex: 0 0 auto; width: 20px; height: 20px; margin: 0; border-radius: 50%; background-position: center; background-size: cover; }
+.b-hot_topics-v2 > a > span:last-child { overflow: hidden; min-width: 0; text-overflow: ellipsis; }
+
+/* Floating "new comments" counter */
+body .b-comments-notifier {
+  border: 2px solid #fff;
+  background: var(--sk-grad) !important;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(128, 70, 150, .3);
+}
 
 /* Forum navigation */
 .b-forums .forum { padding: 3px 0; }
@@ -98,6 +160,12 @@ body .b-clubs .b-club.detailed:hover { border-color: var(--sk-line-strong); back
 #users_index .b-user.detailed .history { position: static; clear: both; height: auto; max-height: none; overflow: visible; float: none; width: auto; margin: 10px 0 0; padding-top: 10px; border-top: 1px solid var(--sk-line); color: var(--sk-ink-3); font-size: 11px; line-height: 1.6; }
 
 /* Dialogs & messages */
+.p-dialogs-index .b-dialog .b-message,
+.b-dialog .inner .b-message {
+  margin: 8px 0 0;
+  border-color: transparent;
+  background: rgba(248, 242, 251, .72);
+}
 .b-dialog, .b-message {
   box-sizing: border-box;
   margin-bottom: 8px;

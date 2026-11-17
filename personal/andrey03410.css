@@ -44,3 +44,9 @@
     pointer-events: none;
   }
 }
+
+/* Own messages in dialogs get a soft lilac tint */
+.b-message[data-user_nickname="andrey03410"] {
+  border-color: rgba(144, 100, 182, .18);
+  background: rgba(241, 231, 248, .82);
+}

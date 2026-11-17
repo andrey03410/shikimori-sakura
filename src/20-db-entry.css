@@ -114,7 +114,6 @@
   box-shadow: var(--sk-shadow-1), var(--sk-highlight);
 }
 .b-db_entry .c-about .block { margin-bottom: 0; }
-.b-db_entry .c-info-right > .block + .block { margin-top: 18px; }
 .b-db_entry > .c-description, .b-db_entry > .c-about > .c-description { line-height: 1.75; }
 /* Character pages keep the description inside the info column */
 .b-db_entry > .c-about > .c-description { float: none; width: auto !important; margin: 18px 0 0 !important; }
@@ -130,51 +129,112 @@
 .b-db_entry .b-entry-info .line .value .b-anime_status_tag { margin-top: 1px; margin-bottom: 1px; }
 .b-db_entry .b-entry-info .additional-links { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--sk-line); line-height: 1.7; }
 
-/* Score: stars + big number on one line, never wider than the card */
-.b-db_entry .scores .b-rate {
-  display: flex;
-  flex-wrap: wrap;
+/* --- Rating card -------------------------------------------------------
+   One soft panel: the big score on the left, stars, verdict and MAL on the
+   right. Contest placings and the studio follow as quiet sections. */
+.b-db_entry .c-info-right > .block + .block { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--sk-line); }
+.b-db_entry .c-info-right > .block:not(:first-child) > .subheadline { margin-bottom: 10px; padding-bottom: 0; border-bottom: 0; }
+.b-db_entry .c-info-right .scores {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  grid-template-areas: "value stars stars" "value notice mal";
   align-items: center;
-  gap: 2px 12px;
-  width: auto !important;
-  max-width: 100%;
-  margin: 0 !important;
+  gap: 4px 16px;
+  padding: 14px 18px;
+  border: 1px solid rgba(144, 100, 182, .14);
+  border-radius: var(--sk-r);
+  background:
+    radial-gradient(ellipse 70% 120% at 0% 0%, rgba(255, 255, 255, .85), transparent 70%),
+    linear-gradient(120deg, rgba(241, 231, 248, .95), rgba(252, 236, 244, .8));
 }
-.b-db_entry .scores .b-rate .stars-container { flex: 0 0 auto; }
-.b-db_entry .scores .b-rate .text-score { display: flex; flex-direction: column; align-items: flex-start; float: none; width: auto; margin: 0; line-height: 1; }
-.b-db_entry .scores .b-rate .score-value { color: var(--sk-plum-deep); font-size: 30px; font-weight: 800; line-height: 1; letter-spacing: -.02em; }
-.b-db_entry .scores .b-rate .score-notice { margin-top: 3px; color: var(--sk-ink-3); font-size: 11.5px; line-height: 1.2; text-align: left; }
-.b-mal_score { margin-top: 8px; color: var(--sk-ink-3); font-size: 11.5px; letter-spacing: .02em; }
+.b-db_entry .c-info-right .scores > .b-rate,
+.b-db_entry .c-info-right .scores > .b-rate > .text-score { display: contents !important; }
+.b-db_entry .c-info-right .scores .stars-container { grid-area: stars; align-self: end; margin: 0; }
+/* The site enlarges the star glyphs to 38px on phones; one size, tight line box */
+.b-db_entry .c-info-right .scores .stars { font-size: 30px !important; line-height: 1 !important; }
+.b-db_entry .c-info-right .scores :is(.stars-container, .hoverable-trigger) { line-height: 1 !important; }
+.b-db_entry .c-info-right .scores .score-value {
+  grid-area: value;
+  float: none;
+  margin: 0;
+  color: var(--sk-plum-deep);
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+}
+.b-db_entry .c-info-right .scores .score-notice {
+  grid-area: notice;
+  align-self: start;
+  float: none;
+  margin: 0;
+  color: var(--sk-ink-2);
+  font-size: 12.5px;
+  font-weight: 650;
+  line-height: 1.4;
+  text-align: left;
+}
+.b-db_entry .c-info-right .scores .b-mal_score {
+  grid-area: mal;
+  align-self: start;
+  justify-self: start;
+  margin: 0;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .75);
+  color: var(--sk-ink-3);
+  font-size: 11px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
 .b-mal_score span { color: var(--sk-ink-2); font-weight: 700; }
-
-/* Contest placings under the score */
-.b-db_entry .contest_winners { display: flex; gap: 10px; align-items: flex-start; }
-.b-db_entry .contest_winners .medal { flex: 0 0 auto; float: none; margin: 0; }
-.b-db_entry .contest_winners .winners { flex: 1 1 auto; float: none; width: auto; min-width: 0; margin: 0; }
-.b-db_entry .contest_winners .winner { overflow: hidden; padding: 1px 0; border-radius: var(--sk-r-xs); color: var(--sk-ink-3); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
-
-/* Studio logo: a quiet tile instead of a full-width billboard */
-.b-db_entry .c-info-right .studio-logo {
-  display: block;
-  box-sizing: border-box;
-  width: auto;
-  max-width: 100%;
-  max-height: 84px;
-  margin: 0 auto;
-  object-fit: contain;
+.b-db_entry .c-about > .cc > .c-info-right { container: sk-rating / inline-size; }
+/* Narrow rating column: number + verdict on top, stars on their own row */
+@container sk-rating (max-width: 320px) {
+  .b-db_entry .c-info-right .scores {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: "value notice" "value mal" "stars stars";
+    gap: 2px 14px;
+    padding: 12px 14px 14px;
+  }
+  .b-db_entry .c-info-right .scores .score-notice { align-self: end; }
+  .b-db_entry .c-info-right .scores .stars-container { margin-top: 8px; }
+  .b-db_entry .c-info-right .scores .score-value { font-size: 40px; }
 }
+
+/* Contest placings: medal + a quiet list */
+.b-db_entry .contest_winners { display: flex; gap: 12px; align-items: flex-start; }
+.b-db_entry .contest_winners .medal { flex: 0 0 auto; float: none; margin: 2px 0 0; }
+.b-db_entry .contest_winners .winners { display: flex; flex-direction: column; gap: 3px; flex: 1 1 auto; float: none; width: auto; min-width: 0; margin: 0 !important; }
+.b-db_entry .contest_winners .winner { overflow: hidden; padding: 0; color: var(--sk-ink-3); font-size: 12.5px; line-height: 1.5; text-overflow: ellipsis; white-space: nowrap; }
+.b-db_entry .contest_winners .winner a { color: var(--sk-ink-2); }
+.b-db_entry .contest_winners .winner a:hover { color: var(--sk-link-hover); }
+
+/* Studio: the logo itself, large, blended into the card (no white box) */
+.b-db_entry .c-info-right .block:has(.studio-logo) .block { margin: 0; }
 .b-db_entry .c-info-right a:has(> .studio-logo) {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 84px;
-  padding: 12px;
-  border: 1px solid var(--sk-line);
-  border-radius: var(--sk-r);
-  background: rgba(255, 255, 255, .7);
-  transition: border-color var(--sk-fast) ease, box-shadow var(--sk-dur) ease;
+  min-height: 0;
+  padding: 6px 0 2px;
+  border: 0;
+  background: none;
 }
-.b-db_entry .c-info-right a:has(> .studio-logo):hover { border-color: var(--sk-line-strong); box-shadow: var(--sk-shadow-1); }
+.b-db_entry .c-info-right .studio-logo {
+  display: block;
+  width: auto;
+  max-width: min(100%, 240px);
+  height: auto;
+  max-height: 150px;
+  margin: 0 auto;
+  border-radius: var(--sk-r-s);
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  transition: filter var(--sk-dur) ease;
+}
+.b-db_entry .c-info-right a:hover > .studio-logo { filter: saturate(1.12) brightness(1.03); }
 
 /* "Other names" opener: an inline pill instead of a floating dot row */
 .b-db_entry .b-entry-info a.other-names {

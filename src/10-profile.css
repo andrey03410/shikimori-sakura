@@ -97,18 +97,31 @@
 }
 
 /* Name block */
+/* Name on its own line; status + chips in one row underneath */
 .p-profiles-show .profile-head .c-brief header.head {
   grid-area: name;
   align-self: end;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 6px;
   margin: 0;
   padding: 6px 0 0;
 }
 .p-profiles-show .profile-head .c-brief header h1 {
-  margin: 0;
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 0 !important;
+  /* room for descenders: the gradient text is clipped to this box */
+  padding: 0 0 .12em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: var(--sk-plum-deep);
   font-size: clamp(28px, 2.4vw, 38px);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.15;
   letter-spacing: -.03em;
   text-shadow: none;
   pointer-events: auto;
@@ -121,16 +134,50 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 12px;
+  margin: 0 !important;
   color: var(--sk-ink-3);
   font-size: 12px;
 }
-.p-profiles-show .profile-head .c-brief .notice > span {
-  padding: 3px 10px;
+.p-profiles-show .profile-head .c-brief .notice > span,
+.p-profiles-show .profile-head .c-brief header > .misc > span {
+  display: inline-block;
+  box-sizing: border-box;
+  height: 26px;
+  padding: 0 11px;
   border: 1px solid var(--sk-line);
   border-radius: 999px;
   background: rgba(255, 255, 255, .7);
+  color: var(--sk-ink-2);
+  font-size: 12px;
+  line-height: 24px;
+  white-space: nowrap;
 }
+/* "сейчас на сайте" / "в сети: …" (shown to visitors): first chip, tinted */
+.p-profiles-show .profile-head .c-brief header > .misc {
+  display: flex;
+  order: 1;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}
+.p-profiles-show .profile-head .c-brief header > .misc > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-color: rgba(144, 100, 182, .2);
+  background: var(--sk-plum-soft);
+  color: var(--sk-plum-ink);
+  font-weight: 600;
+}
+.p-profiles-show .profile-head .c-brief header > .misc > span::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sk-sakura);
+  box-shadow: 0 0 0 3px rgba(201, 111, 156, .18);
+}
+.p-profiles-show .profile-head .c-brief header > .notice { order: 2; }
 .p-profiles-show .profile-head .c-brief .notice > span::before,
 .p-profiles-show .profile-head .c-brief .notice > span::after { content: none !important; }
 .p-profiles-show .profile-head .c-mobile-actions { display: none; }
@@ -239,10 +286,17 @@
 }
 .p-profiles-show .lifetime .title .value { color: var(--sk-plum-deep); font-size: 15px; font-weight: 750; border-bottom: 0; }
 .p-profiles-show .lifetime .bar { height: 8px; overflow: visible; border-radius: 999px; background: var(--sk-tint-2); }
-.p-profiles-show .lifetime .bar .first { border-radius: 999px; background: var(--sk-grad); }
-.p-profiles-show .lifetime .bar .third { background: transparent; }
+.p-profiles-show .lifetime .bar .first { border-radius: 999px; background: var(--sk-grad) !important; }
+.p-profiles-show .lifetime .bar :is(.second, .third) { background: transparent !important; }
+/* Milestone dots sit on the 10/30/50/70/90% cuts under each label */
+.p-profiles-show .lifetime .bar .cuts { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; }
+.p-profiles-show .lifetime:has(.time:nth-child(1).checked) .cut.week,
+.p-profiles-show .lifetime:has(.time:nth-child(2).checked) .cut.month,
+.p-profiles-show .lifetime:has(.time:nth-child(3).checked) .cut.month_3,
+.p-profiles-show .lifetime:has(.time:nth-child(4).checked) .cut.month_6,
+.p-profiles-show .lifetime:has(.time:nth-child(5).checked) .cut.year { background: var(--sk-plum) !important; }
 .p-profiles-show .lifetime .cuts .cut {
-  top: -3px;
+  top: -1px;
   width: 10px;
   height: 10px;
   margin-left: -5px;
@@ -252,7 +306,8 @@
   box-shadow: 0 1px 4px rgba(80, 40, 100, .18);
   box-sizing: border-box;
 }
-.p-profiles-show .lifetime .times { margin-top: 10px; color: var(--sk-ink-3); font-size: 11px; }
+.p-profiles-show .lifetime .times { display: flex; margin-top: 10px; color: var(--sk-ink-3); font-size: 11px; }
+.p-profiles-show .lifetime .times .time { flex: 1 1 0; width: auto; min-width: 0; text-align: center; }
 .p-profiles-show .lifetime .times .time.checked { color: var(--sk-plum); font-weight: 650; }
 .p-profiles-show .lifetime .times .time.checked::before { color: var(--sk-sakura); }
 
@@ -378,7 +433,9 @@
   .p-profiles-show .profile-head .profile-actions a { width: 28px; height: 28px; }
   .p-profiles-show .profile-head .c-brief header.head { align-self: center; }
   .p-profiles-show .profile-head .c-brief header h1 { font-size: clamp(22px, 7vw, 28px); }
-  .p-profiles-show .profile-head .c-brief .notice { margin-top: 8px; font-size: 11px; }
+  .p-profiles-show .profile-head .c-brief .notice { font-size: 11px; }
+  .p-profiles-show .profile-head .c-brief .notice > span,
+  .p-profiles-show .profile-head .c-brief header > .misc > span { height: 24px; padding: 0 9px; font-size: 11px; line-height: 22px; }
   .p-profiles-show .profile-head .b-stats_bar { padding: 12px; }
   .p-profiles-show .profile-head .b-stats_bar .compatibility { display: none; }
   .p-profiles-show .profile-head .b-stats_bar .stat_names { gap: 4px 10px; font-size: 11px; }
@@ -400,4 +457,6 @@
   .p-profiles-show .cc-favourites { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
   .p-profiles-show .lifetime .title { flex-direction: column-reverse; align-items: flex-start; gap: 4px; }
   .p-profiles-show .lifetime .times { font-size: 10px; }
+  /* the filled dot already marks a reached milestone */
+  .p-profiles-show .lifetime .times .time.checked::before { display: none; }
 }

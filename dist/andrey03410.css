@@ -15,3 +15,4 @@
 .b-badge.level-1[data-progress="100"][href$="/franchise/aria"]{--sk-badge-gif: url("https://media.tenor.com/LTK_PPo1nx8AAAAM/aria-the-animation-akari-mizunashi.gif")}
 .b-badge.level-1[data-progress="100"][href*="/achievements/franchise/"]::after{content: "";position: absolute;inset: 0;z-index: 1;border-radius: inherit;background: var(--sk-badge-gif, none) center / cover no-repeat;pointer-events: none}
 }
+.b-message[data-user_nickname="andrey03410"]{border-color: rgba(144, 100, 182, .18);background: rgba(241, 231, 248, .82)}

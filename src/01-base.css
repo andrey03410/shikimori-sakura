@@ -4,6 +4,20 @@
 
 /* The sakura sits on its own fixed layer: it is composited once and never
    repainted while scrolling (background-attachment: fixed repaints every frame). */
+/* Shikimori paints links, icons and headlines through its own variables.
+   Re-pointing them recolours every remaining blue link on the site. */
+html[data-color-mode]:root, :root {
+  --link-color: #7b4d94;
+  --link-hover-color: #b0568a;
+  --link-active-color: #8a3f74;
+  --link-border-color: rgba(123, 77, 148, .3);
+  --link-border-hover-color: rgba(176, 86, 138, .3);
+  --link-border-active-color: rgba(138, 63, 116, .3);
+  --icon-color: #8a7896;
+  --headline-color: #65516f;
+  --headline-background-color: transparent;
+  --headline-border-color: rgba(117, 74, 140, .13);
+}
 html {
   background: #eadcf0;
   scroll-padding-top: calc(var(--top-menu-height, 46px) + 16px);
